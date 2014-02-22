@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Web;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace MH3UWikiScraper
             {
                 int i = 0;
                 var rows = table.CssSelect("tr");
+                string currentGroupAlphabetized = "";
                 foreach (var tr in rows)
                 {
                     i++;
@@ -60,6 +62,12 @@ namespace MH3UWikiScraper
                         }
                         if (isRelevantRow)
                         {
+                            if (cells.Count == 6)
+                            {
+                                // First cell will be the group
+                                var colors = Utils.ParseColors(firstCell);
+                                currentGroupAlphabetized = Utils.BuildNoteKey(colors, true);
+                            }
                             var item = new Song();
                             var songCell = cells[1 + cellCorrection];
                             // Song/colors
@@ -91,10 +99,11 @@ namespace MH3UWikiScraper
                                 item.Extension = "-";
                             }
 
-                            if (!results.Songs.ContainsKey(item.NoteKey))
+                            if (!results.Songs.ContainsKey(currentGroupAlphabetized))
                             {
-                                results.Songs[item.NoteKey] = item;
+                                results.Songs[currentGroupAlphabetized] = new List<Song>();
                             }
+                            results.Songs[currentGroupAlphabetized].Add(item);
                         }
                     }
                 }
@@ -125,14 +134,26 @@ namespace MH3UWikiScraper
             return colors;
         }
 
-        virtual public string BuildNoteKey(IEnumerable<string> notes)
+        virtual public string BuildNoteKey(IEnumerable<string> notes, bool alphabetize=false)
         {
-            return String.Join("", notes);
+            var x = notes;
+            if (alphabetize)
+            {
+                var y = x.ToList();
+                y.Sort();
+                x = y;
+            }
+            return String.Join("", x);
         }
 
-        virtual public string ParseText(HtmlNode extensionCell)
+        virtual public string ParseText(HtmlNode extensionCell, bool htmlEncode = true)
         {
-            return extensionCell.InnerText.Trim();
+            string results = extensionCell.InnerText.Trim();
+            if (htmlEncode && !String.IsNullOrWhiteSpace(results))
+            {
+                results = HttpUtility.HtmlEncode(results);
+            }
+            return results;
         }
         
     }
@@ -141,10 +162,10 @@ namespace MH3UWikiScraper
     {
         public SongTableScrapeResults()
         {
-            Songs = new Dictionary<string, Song>();
+            Songs = new Dictionary<string, List<Song>>();
         }
         // Get every song and put it into a list
-        public Dictionary<string, Song> Songs { get; set; }
+        public Dictionary<string, List<Song>> Songs { get; set; }
 
     }
     [DebuggerDisplay("{NoteKey} ({Effect1})")]

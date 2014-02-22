@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using System.Dynamic;
 using System.IO;
+using System.Web;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using System;
@@ -34,7 +36,7 @@ namespace MH3UWikiScraper
             var allHorns = data.Horns.SelectMany(i => i.Value).ToList();
             var allSongs = data.Songs.Values.ToList();
 
-            
+#if false
             foreach (var huntingHorn in allHorns)
             {
                 var pair = new HornSongPair();
@@ -55,6 +57,7 @@ namespace MH3UWikiScraper
                 }
                 hornSongs.Add(pair);
             }
+#endif
         }
 
 
@@ -76,12 +79,111 @@ namespace MH3UWikiScraper
             var dataPack = new FullDataPack();
             dataPack.Songs = songs.Songs;
             dataPack.Horns = mapping;
-            dataPack.Colors = new List<string>(songs.Songs.SelectMany(i => i.Value.Notes).Distinct());
+            dataPack.Colors = new List<string>();
+
+            var colors = new HashSet<char>();
+            foreach (var item in dataPack.Songs)
+            {
+                foreach (var c in item.Key.ToCharArray())
+                {
+                    colors.Add(c);
+                }
+            }
+            dataPack.Colors = colors.Select(i => i.ToString()).ToList();
             dataPack.Colors.Sort();
 
-            string outputPath = "Output.json";
+            dataPack.AvailableNoteCombinations = dataPack.Songs.Keys.ToList();
+
+            string outputPath = "Scraped.json";
             File.WriteAllText(outputPath, JsonConvert.SerializeObject(dataPack, Formatting.Indented));
             
+        }
+    }
+
+    public class LinkFiller
+    {
+        public LinkFiller()
+        {
+            Derivers = new List<IHuntingHornLinkDeriver>
+            {
+                new KiranicoHornLinkDeriver(),
+                new MonsterHunterWikiLinkDeriver(),
+            };
+        }
+        public bool ShouldOverwriteExisting { get; set; }
+        public List<IHuntingHornLinkDeriver> Derivers { get; set; }
+
+        public void Fill(IEnumerable<HuntingHorn> horns)
+        {
+            foreach (var huntingHorn in horns)
+            {
+                if (huntingHorn.Links == null)
+                {
+                    huntingHorn.Links = new Dictionary<string, string>();
+                }
+                
+                foreach (var linkDeriver in Derivers)
+                {
+                    if (ShouldOverwriteExisting || !huntingHorn.Links.ContainsKey(linkDeriver.Key))
+                    {
+                        huntingHorn.Links[linkDeriver.Key] = linkDeriver.DeriveLink(huntingHorn);
+                    }
+                }
+            }
+        }
+    }
+
+
+    public interface IHuntingHornLinkDeriver
+    {
+        string Key { get; }
+        string DeriveLink(HuntingHorn horn);
+    }
+
+    public class MonsterHunterWikiLinkDeriver : IHuntingHornLinkDeriver
+    {
+        public MonsterHunterWikiLinkDeriver()
+        {
+            Domain = "http://monsterhunter.wikia.com";
+            PageFormatString = "/wiki/{0}";
+        }
+        public string Domain { get; set; }
+        public string PageFormatString { get; set; }
+
+        public string FullyQualifyPage(string page)
+        {
+            var builder = new UriBuilder(Domain);
+            builder.Path = page;
+            builder.Port = -1;
+            return builder.ToString();
+        }
+
+        public string DeriveLink(HuntingHorn horn)
+        {
+            string massagedName = horn.Name.Replace(" ", "_");
+            string page = String.Format(PageFormatString, massagedName);
+            return FullyQualifyPage(page);
+        }
+
+        public string Key
+        {
+            get { return Constants.KiranicoLinkKey; }
+        }
+    }
+
+    public class KiranicoHornLinkDeriver : IHuntingHornLinkDeriver
+    {
+        public string BaseUriFormatString = "http://kiranico.com/weapon/huntinghorn/{0}";
+
+        public string DeriveLink(HuntingHorn horn)
+        {
+            string massagedName = horn.Name.ToLower().Replace(" ", "-");
+            return String.Format(BaseUriFormatString, massagedName);
+        }
+
+        public string Key
+        {
+            get { return Constants.KiranicoLinkKey; }
         }
     }
     
@@ -94,8 +196,8 @@ namespace MH3UWikiScraper
 
     public class FullDataPack
     {
-        public Dictionary<string, Song> Songs { get; set; }
-        public Dictionary<string, Song> Songs2 { get; set; }
+        public List<string> AvailableNoteCombinations { get; set; }
+        public Dictionary<string, List<Song>> Songs { get; set; }
         public Dictionary<string, List<HuntingHorn>> Horns { get; set; }
         public List<string> Colors { get; set; } 
 

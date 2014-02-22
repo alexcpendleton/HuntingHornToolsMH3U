@@ -18,6 +18,7 @@
             }
             .note { display: table-cell;width: 50px;height: 50px;vertical-align: middle;text-align: center;font-weight: bold;}
             .note_a {  } /* aqua */
+            .patternSelected { border: solid 1px blue;}
         </style>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
@@ -26,13 +27,31 @@
     </head>
     <body>
         <div class="accordion">
-            <ul data-bind="foreach: colors">
-                <li data-bind="class: cssClass">
-                    <span data-bind="text: color"></span>
-                    <input type="checkbox" data-bind="checked: isChecked"/>
+            <ul data-bind="foreach: patterns">
+                <li data-bind="css: cssClass, click: selectMe">
+                    <span data-bind="foreach: notes">
+                        <span data-bind="text: text, css: cssClass"></span>
+                    </span>
+                    <span data-bind=""></span>
                 </li>
             </ul>
-            <input type="button" class="" id="deriveSongsButton" value="Derive Songs"/>
+            <div id="songsForSelectedPattern">
+                <ul data-bind="foreach: selectedPatternSongs">
+                    <li>
+                        <div>
+                            <span data-bind="foreach: notes">
+                                <span data-bind="text: text, css: cssClass"></span>
+                            </span>
+                        </div>
+                        <div>
+                            <span data-bind="text: effect1"></span> / <span data-bind="text: effect2"></span>
+                        </div>
+                        <div>
+                            <span data-bind="text: duration"></span> / <span data-bind="text: extension"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
@@ -48,28 +67,113 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-min.js"></script>
 	<script type="text/javascript">
         $(function () {
+            
             var viewModel = {};
-
-            var vmColors = [];
-            for (var i = 0; i < hhu.data.Colors.length; i++) {
-                var item = hhu.data.Colors[i];
-                vmColors.push({
-                    imgSrc: 'img/note_' + item + '.png',
-                    color: item,
-                    cssClass: 'note note_' + item,
-                    isChecked: false
-                });
+            viewModel.patterns = ko.observableArray([]);
+            viewModel.selectedPattern = ko.observable();
+            viewModel.selectedPatternSongs = ko.observableArray([]);
+            function makeNoteStuff(noteKey) {
+                var splitNotes = noteKey.split("");
+                var results = [];
+                for (var j = 0; j < splitNotes.length; j++) {
+                    var currentNote = splitNotes[j];
+                    results.push({
+                        cssClass: "hornNote hornNote_" + currentNote,
+                        text: currentNote,
+                        image: "n/a yet"
+                    });
+                }
+                return results;
             }
-            viewModel.colors = vmColors;
-            ko.applyBindings(viewModel);
+            
+            function triggerPatternChange(changeTo) {
+                viewModel.selectedPattern(changeTo);
+            }
 
-            function deriveSongs() {
+            function SongModel(songDatum) {
+                var self = this;
+                self.noteKey = songDatum.NoteKey;
+                self.notes = makeNoteStuff(songDatum.NoteKey);
+                self.effect1 = songDatum.Effect1;
+                self.effect2 = songDatum.Effect2;
+                self.duration = songDatum.Duration1;
+                self.extension = songDatum.Extension;
+                return self;
+            }
+
+            function PatternModel(noteKey, songs) {
+                var building = this;
+
+                building.makeCssClassBySelected = function () {
+                    var css = "pattern pattern_" + noteKey;
+                    if (this.isSelected()) {
+                        css += " patternSelected";
+                    }
+                    return css;
+                };
+                building.updateCssClass = function() {
+                    var css = this.makeCssClassBySelected();
+                    this.cssClass(css);
+                };
+                building.selectMe = function () {
+                    triggerPatternChange(this);
+                };
                 
+                building.noteKey = noteKey;
+                building.cssClass = ko.observable();
+                building.notes = makeNoteStuff(noteKey);
+                building.songs = [];
+                for (var i = 0; i < songs.length; i++) {
+                    building.songs.push(new SongModel(songs[i]));
+                }
+                building.isSelected = ko.observable(false);
+
+                
+                building.updateCssClass();
+                
+                return building;
             }
-
-            $("#deriveSongsButton").click(function() {
-
+            
+            /*
+            ko.bindingHandlers.selectable = {
+                init: function (element, valueAccessor) {
+                    $(element).attr("id", "selectable").selectable({
+                        selected: function (event, ui) {
+                            vm.selectRequest($(ui.selected).tmplItem().data);
+                        },
+                        unselected: function (event, ui) {
+                            vm.unselectRequest($(ui.unselected).tmplItem().data);
+                        }
+                    });
+                }
+            };
+            */
+            
+            viewModel.selectedPattern.subscribe(function (newValue) {
+                if (!newValue) return;
+                var all = viewModel.patterns();
+                for (var i = 0; i < all.length; i++) {
+                    var current = all[i];
+                    current.isSelected(current === newValue);
+                    current.updateCssClass();
+                }
+                viewModel.selectedPatternSongs(newValue.songs);
+                console.log("selected pattern changed:", newValue);
             });
+
+            var allPatterns = hhu.data.Songs;
+            var i = 0;
+            for (var noteKey in allPatterns) {
+                var current = allPatterns[noteKey];
+                var item = new PatternModel(noteKey, current);
+                viewModel.patterns.push(item);
+                i = i + 1;
+            }
+            
+            console.log("stringified...", JSON.stringify(viewModel));
+            ko.applyBindings(viewModel);
+            //viewModel.selectedPattern(viewModel.patterns()[0]);
+
         });
 	</script>
     </body>

@@ -24,6 +24,7 @@ namespace MH3UWikiScraper
         {
             var results = new Dictionary<string, List<HuntingHorn>>();
             var treeTables = Document.DocumentNode.CssSelect("table");
+            var linkDeriver = new MonsterHunterWikiLinkDeriver();
             foreach (var table in treeTables)
             {
                 var rows = table.CssSelect("tr").ToList();
@@ -49,7 +50,11 @@ namespace MH3UWikiScraper
                         var anchor = nameCell.CssSelect("a");
                         if (anchor.Count() > 0)
                         {
-                            item.Name = Utils.ParseText(anchor.FirstOrDefault());
+                            var anchorNode = anchor.FirstOrDefault();
+                            item.Name = Utils.ParseText(anchorNode);
+                            string page = anchorNode.GetAttributeValue("href");
+                            string result = linkDeriver.FullyQualifyPage(page);
+                            item.Links[Constants.WikiLinkKey] = result;
                         }
                         else
                         {
@@ -69,7 +74,7 @@ namespace MH3UWikiScraper
                         item.Rarity = Utils.ParseText(cells[1]);
                         item.Attack = Utils.ParseText(cells[2]);
                         item.Notes = Utils.ParseColors(cells[3]);
-                        item.NoteKey = Utils.BuildNoteKey(item.Notes);
+                        item.NoteKey = Utils.BuildNoteKey(item.Notes, true);
                         if (String.IsNullOrWhiteSpace(item.NoteKey))
                         {
                             continue;
@@ -89,10 +94,25 @@ namespace MH3UWikiScraper
     [DebuggerDisplay("{Name} ({Notes})")]
     public class HuntingHorn
     {
+        public HuntingHorn()
+        {
+            Links = new Dictionary<string, string>();
+            Notes = new List<string>();
+        }
         public string Name { get; set; }
         public string Rarity { get; set; }
         public string Attack { get; set; }
         public IEnumerable<string> Notes { get; set; }
         public string NoteKey { get; set; }
+
+        public Dictionary<string, string> Links { get; set; }
     }
+
+    public class Constants
+    {
+        public const string KiranicoLinkKey = "Kiranico";
+        public const string WikiLinkKey = "MHWiki";
+        public const string GoogleLinkKey = "Google";
+    }
+
 }

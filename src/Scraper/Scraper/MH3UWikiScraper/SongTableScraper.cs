@@ -66,7 +66,7 @@ namespace MH3UWikiScraper
                             {
                                 // First cell will be the group
                                 var colors = Utils.ParseColors(firstCell);
-                                currentGroupAlphabetized = Utils.BuildNoteKey(colors, true);
+                                currentGroupAlphabetized = Utils.BuildNoteKey(colors, false);
                             }
                             var item = new Song();
                             var songCell = cells[1 + cellCorrection];
@@ -151,7 +151,7 @@ namespace MH3UWikiScraper
             string results = extensionCell.InnerText.Trim();
             if (htmlEncode && !String.IsNullOrWhiteSpace(results))
             {
-                results = HttpUtility.HtmlEncode(results);
+                results = HttpUtility.HtmlDecode(results);
             }
             return results;
         }

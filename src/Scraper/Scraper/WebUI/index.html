@@ -13,49 +13,119 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
             body {
-                padding-bottom: 20px;
 				background:#fff;
             }
-            .note { display: table-cell;width: 50px;height: 50px;vertical-align: middle;text-align: center;font-weight: bold;}
-            .note_a {  } /* aqua */
-            .patternSelected { border: solid 1px blue;}
-        </style>
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/main.css">
+            .hornNote {
+                display: inline-block;
+                width: 18px;
+                height: 25px;
+                vertical-align: middle;
+                text-align: center;
+                font-weight: bold;
 
+                background: no-repeat center center;
+                color: transparent;
+            }
+            .hornNote_a {
+                background-image: url(img/note_a.png);
+            }
+            .hornNote_b {
+                background-image: url(img/note_b.png);
+            }
+            .hornNote_g {
+                background-image: url(img/note_g.png);
+            }
+            .hornNote_o {
+                background-image: url(img/note_o.png);
+            }
+            .hornNote_p {
+                background-image: url(img/note_p.png);
+            }
+            .hornNote_r {
+                background-image: url(img/note_r.png);
+            }
+            .hornNote_w {
+                background-image: url(img/note_w.png);
+            }
+            .hornNote_y {
+                background-image: url(img/note_y.png);
+            }
+            .patternSelected {
+                background: skyblue;
+            }
+
+            .container { max-width: 730px; }
+            
+            .songDescriptions { padding: .5em 0; }
+            .songDescriptions .durations { }
+            .songData {
+                min-height: 4em;
+                vertical-align: middle;
+                overflow: auto;
+            }
+            .songNotes {display: block;float: left;line-height: 3.75em;margin-right: 0.5em;}
+            .songNotes .hornNote { }
+            .effects { display: block;float:left;}
+            .effect { font-weight: bold;}
+            .duration { font-style: italic; }
+            .notesLabel > .dropdown-toggle { padding: 0;}
+
+        </style>
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
-        <div class="accordion">
-            <ul data-bind="foreach: patterns">
-                <li data-bind="css: cssClass, click: selectMe">
-                    <span data-bind="foreach: notes">
-                        <span data-bind="text: text, css: cssClass"></span>
-                    </span>
-                    <span data-bind=""></span>
-                </li>
-            </ul>
-            <div id="songsForSelectedPattern">
-                <ul data-bind="foreach: selectedPatternSongs">
-                    <li>
-                        <div>
-                            <span data-bind="foreach: notes">
-                                <span data-bind="text: text, css: cssClass"></span>
-                            </span>
-                        </div>
-                        <div>
-                            <span data-bind="text: effect1"></span> / <span data-bind="text: effect2"></span>
-                        </div>
-                        <div>
-                            <span data-bind="text: duration"></span> / <span data-bind="text: extension"></span>
-                        </div>
-                    </li>
-                </ul>
+        <div class="container">
+            <div class="">
+                <div class="row">
+                    <div class="">
+                        <nav class="" role="">
+                            <div id="noteDropDownWrapper" class="">
+                                <ul class="nav navbar">
+                                    <li class="notesLabel dropdown">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            Choose your horn: 
+                                            <!-- ko foreach: selectedPatternNotes -->
+                                            <span data-bind="text: text, css: cssClass"></span>
+                                            <!-- /ko -->
+                                            <strong class="caret"></strong>
+                                        </a>
+                                        <ul data-bind="foreach: patterns " class="dropdown-menu">
+                                            <li data-bind="css: cssClass, click: selectMe">
+                                                <a data-bind="foreach: notes" href="#">
+                                                    <span data-bind="text: text, css: cssClass"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div id="songsForSelectedPattern" class="row">
+                    <div class="">
+                        <ul data-bind="foreach: selectedPatternSongs" class="list-group">
+                            <li class="list-group-item">
+                                <div class="songData">
+                                    <div data-bind="foreach: notes" class="songNotes">
+                                        <span data-bind="text: text, css: cssClass"></span>
+                                    </div>
+                                    <div class="songDescriptions">
+                                        <span class="effects">
+                                            <span class="effect effect1" data-bind="text: effect1"></span> <span class="duration" data-bind="text: duration"></span> <br/> <span data-bind="text: effect2" class="effect effect2"></span> <span data-bind="text: extension" class="duration extension"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/vendor/bootstrap.js"></script>
 	<script src="js/HornSongData.js"></script>
 	<script>
 		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
@@ -72,15 +142,21 @@
             viewModel.patterns = ko.observableArray([]);
             viewModel.selectedPattern = ko.observable();
             viewModel.selectedPatternSongs = ko.observableArray([]);
+            viewModel.selectedPatternNotes = ko.observableArray([{
+                isActuallyANote: false,
+                cssClass: "selectText",
+                text: "Select..."
+            }]);
+            
             function makeNoteStuff(noteKey) {
                 var splitNotes = noteKey.split("");
                 var results = [];
                 for (var j = 0; j < splitNotes.length; j++) {
                     var currentNote = splitNotes[j];
                     results.push({
+                        isActuallyANote:true,
                         cssClass: "hornNote hornNote_" + currentNote,
-                        text: currentNote,
-                        image: "n/a yet"
+                        text: currentNote
                     });
                 }
                 return results;
@@ -158,6 +234,7 @@
                     current.updateCssClass();
                 }
                 viewModel.selectedPatternSongs(newValue.songs);
+                viewModel.selectedPatternNotes(newValue.notes);
                 console.log("selected pattern changed:", newValue);
             });
 
@@ -172,8 +249,10 @@
             
             console.log("stringified...", JSON.stringify(viewModel));
             ko.applyBindings(viewModel);
-            //viewModel.selectedPattern(viewModel.patterns()[0]);
+            viewModel.selectedPattern(viewModel.patterns()[0]);
 
+            $(function () {
+            });
         });
 	</script>
     </body>

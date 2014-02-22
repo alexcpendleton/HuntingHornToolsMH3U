@@ -4,28 +4,28 @@ var hhu = {
           "brw",
           "grw",
           "arw",
-          "rwy",
-          "bgw",
+          "ryw",
+          "gbw",
           "abw",
-          "bwy",
+          "ybw",
           "agw",
-          "gwy",
-          "awy",
-          "bpr",
-          "gpr",
-          "apr",
-          "pry",
-          "bgp",
+          "ygw",
+          "yaw",
+          "brp",
+          "grp",
+          "arp",
+          "yrp",
+          "gbp",
           "abp",
-          "bpy",
+          "byp",
           "agp",
-          "gpy",
-          "apy",
-          "opr",
-          "bop",
-          "aop",
-          "gop",
-          "opy"
+          "ygp",
+          "yap",
+          "orp",
+          "obp",
+          "oap",
+          "ogp",
+          "oyp"
         ],
         "Songs": {
             "brw": [
@@ -180,7 +180,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "rwy": [
+            "ryw": [
               {
                   "NoteKey": "wrr",
                   "Notes": [
@@ -218,7 +218,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "bgw": [
+            "gbw": [
               {
                   "NoteKey": "wbb",
                   "Notes": [
@@ -275,7 +275,7 @@ var hhu = {
                     "w",
                     "b"
                   ],
-                  "Effect1": "Health Rec (S) &amp;amp; Antidote",
+                  "Effect1": "Health Rec (S) & Antidote",
                   "Effect2": "-",
                   "Duration1": "-",
                   "Extension": "-"
@@ -343,7 +343,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "bwy": [
+            "ybw": [
               {
                   "NoteKey": "wbb",
                   "Notes": [
@@ -414,7 +414,7 @@ var hhu = {
                     "a",
                     "g"
                   ],
-                  "Effect1": "Health Rec (M) &amp;amp; Deodorant",
+                  "Effect1": "Health Rec (M) & Deodorant",
                   "Effect2": "-",
                   "Duration1": "-",
                   "Extension": "-"
@@ -445,7 +445,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "gwy": [
+            "ygw": [
               {
                   "NoteKey": "wgw",
                   "Notes": [
@@ -496,7 +496,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "awy": [
+            "yaw": [
               {
                   "NoteKey": "wya",
                   "Notes": [
@@ -583,7 +583,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "bpr": [
+            "brp": [
               {
                   "NoteKey": "prbp",
                   "Notes": [
@@ -636,7 +636,7 @@ var hhu = {
                   "Extension": "+120(+180)"
               }
             ],
-            "gpr": [
+            "grp": [
               {
                   "NoteKey": "prgp",
                   "Notes": [
@@ -676,7 +676,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "apr": [
+            "arp": [
               {
                   "NoteKey": "prap",
                   "Notes": [
@@ -740,7 +740,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "pry": [
+            "yrp": [
               {
                   "NoteKey": "pry",
                   "Notes": [
@@ -778,7 +778,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "bgp": [
+            "gbp": [
               {
                   "NoteKey": "pbbp",
                   "Notes": [
@@ -837,7 +837,7 @@ var hhu = {
                     "p",
                     "b"
                   ],
-                  "Effect1": "Health Rec (M) &amp;amp; Antidote",
+                  "Effect1": "Health Rec (M) & Antidote",
                   "Effect2": "-",
                   "Duration1": "-",
                   "Extension": "-"
@@ -907,7 +907,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "bpy": [
+            "byp": [
               {
                   "NoteKey": "pbbp",
                   "Notes": [
@@ -1023,7 +1023,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "gpy": [
+            "ygp": [
               {
                   "NoteKey": "pgp",
                   "Notes": [
@@ -1099,7 +1099,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "apy": [
+            "yap": [
               {
                   "NoteKey": "pya",
                   "Notes": [
@@ -1186,7 +1186,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "opr": [
+            "orp": [
               {
                   "NoteKey": "poor",
                   "Notes": [
@@ -1226,7 +1226,7 @@ var hhu = {
                   "Extension": "+30(+40)"
               }
             ],
-            "bop": [
+            "obp": [
               {
                   "NoteKey": "obpb",
                   "Notes": [
@@ -1235,7 +1235,7 @@ var hhu = {
                     "p",
                     "b"
                   ],
-                  "Effect1": "Attack &amp;amp; Defense Boost (S)",
+                  "Effect1": "Attack & Defense Boost (S)",
                   "Effect2": "Attack and Defense Boost Bonus",
                   "Duration1": "120(150",
                   "Extension": "+90(+120)"
@@ -1279,7 +1279,7 @@ var hhu = {
                   "Extension": "+120(+180)"
               }
             ],
-            "aop": [
+            "oap": [
               {
                   "NoteKey": "popa",
                   "Notes": [
@@ -1332,7 +1332,7 @@ var hhu = {
                   "Extension": "+60(+90)"
               }
             ],
-            "gop": [
+            "ogp": [
               {
                   "NoteKey": "pgp",
                   "Notes": [
@@ -1353,8 +1353,8 @@ var hhu = {
                     "p",
                     "o"
                   ],
-                  "Effect1": "Health Rec (S) &amp;amp; Affinity Boost",
-                  "Effect2": "Health Rec (S) &amp;amp; Affinity Boost Bonus",
+                  "Effect1": "Health Rec (S) & Affinity Boost",
+                  "Effect2": "Health Rec (S) & Affinity Boost Bonus",
                   "Duration1": "120(150)",
                   "Extension": "+90(+120)"
               },
@@ -1372,7 +1372,7 @@ var hhu = {
                   "Extension": "-"
               }
             ],
-            "opy": [
+            "oyp": [
               {
                   "NoteKey": "pyoy",
                   "Notes": [
@@ -1381,8 +1381,8 @@ var hhu = {
                     "o",
                     "y"
                   ],
-                  "Effect1": "Hearing Protection (S) &amp;amp; Wind Pressure Negated",
-                  "Effect2": "Hearing Protection (L) &amp;amp; All Wind Pressure Negated",
+                  "Effect1": "Hearing Protection (S) & Wind Pressure Negated",
+                  "Effect2": "Hearing Protection (L) & All Wind Pressure Negated",
                   "Duration1": "180(240)",
                   "Extension": "-"
               },
@@ -1539,7 +1539,7 @@ var hhu = {
                   }
               },
               {
-                  "Name": "Despot&#39;s Thunderclap",
+                  "Name": "Despot's Thunderclap",
                   "Rarity": "6",
                   "Attack": "874",
                   "Notes": [
@@ -2037,7 +2037,7 @@ var hhu = {
                   "Links": {}
               },
               {
-                  "Name": "Hunter&#39;s Horn",
+                  "Name": "Hunter's Horn",
                   "Rarity": "2",
                   "Attack": "506",
                   "Notes": [
@@ -2049,7 +2049,7 @@ var hhu = {
                   "Links": {}
               },
               {
-                  "Name": "Hunter&#39;s Horn+",
+                  "Name": "Hunter's Horn+",
                   "Rarity": "3",
                   "Attack": "644",
                   "Notes": [
@@ -2495,7 +2495,7 @@ var hhu = {
                   "Links": {}
               },
               {
-                  "Name": "&amp;lt;img alt=&quot;Indent01&quot; src=&quot;http://static2.wikia.nocookie.net/__cb20100125091532/monsterhunter/images/d/d6/Indent01.gif&quot; width=&quot;18&quot; height=&quot;18&quot; data-image-name=&quot;Indent01.gif&quot; data-image-key=&quot;Indent01.gif&quot; /&amp;gt;Vicello Du (Y)",
+                  "Name": "<img alt=\"Indent01\" src=\"http://static2.wikia.nocookie.net/__cb20100125091532/monsterhunter/images/d/d6/Indent01.gif\" width=\"18\" height=\"18\" data-image-name=\"Indent01.gif\" data-image-key=\"Indent01.gif\" />Vicello Du (Y)",
                   "Rarity": "8",
                   "Attack": "966",
                   "Notes": [

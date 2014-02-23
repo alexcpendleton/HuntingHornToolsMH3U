@@ -18,7 +18,8 @@
             .hornNote {
                 display: inline-block;
                 width: 18px;
-                height: 25px;
+                height: 18px;
+                line-height: 15px;
                 vertical-align: middle;
                 text-align: center;
                 font-weight: bold;
@@ -50,6 +51,7 @@
             .hornNote_y {
                 background-image: url(img/note_y.png);
             }
+
             .patternSelected {
                 background: skyblue;
             }
@@ -62,15 +64,30 @@
                 color: #fff;
                 font-weight: bold;
             }
-
             #hornChooser:hover, #hornChooser:active, .open #hornChooser {
                 background: transparent;
             }
-                #hornChooser .caret {
-                    border-top-color: #fff !important;
-                    border-bottom-color: #fff !important;
-                }
-            .songDescriptions .durations { }
+            #hornChooser .caret {
+                border-top-color: #fff !important;
+                border-bottom-color: #fff !important;
+            }
+            #navWrapper { position: relative;overflow: visible;}
+            #noteDropDownWrapper { float: left;width: 49%;}
+            #optionsWrapper { float: right;width:30px;color: #000;text-align: right;}
+            #optionsWrapper a, #optionsWrapper a:hover, #optionsWrapper .open a {
+                background: transparent;
+                padding: 0;
+            }
+            #optionsWrapper .dropdown-menu {
+                padding: 0;margin-left: -140px;width: 180px;
+            }
+            #optionsWrapper .glyphicon {
+                color: #fff;
+                font-size: 16pt;
+            }
+            #optionsWrapper label { font-weight: normal;}
+            #optionsWrapper .list-group { text-align: left;color: #000;margin-bottom: 0;}
+            .songDescriptions .durations {}
             .songData {
                 
                 vertical-align: middle;
@@ -95,64 +112,123 @@
                 text-decoration: none;
                 background: #428bca;
             }
+
+
+            .colorblindMode .hornNote {
+                color: #FFF;background-image: none;border: solid 1px #000;
+                text-transform: uppercase
+            }
+
+            .colorblindMode .hornNote_a {
+                background-color: aqua;
+                color: #000;
+            }
+
+            .colorblindMode .hornNote_b {
+                background-color: blue;
+            }
+
+            .colorblindMode .hornNote_g {
+                background-color: green;
+            }
+
+            .colorblindMode .hornNote_o {
+                background-color: orange;
+            }
+
+            .colorblindMode .hornNote_p {
+                background-color: purple;
+            }
+
+            .colorblindMode .hornNote_r {
+                background-color: red;
+            }
+
+            .colorblindMode .hornNote_w {
+                background-color: white;
+                color: #000;
+            }
+
+            .colorblindMode .hornNote_y {
+                background-color: yellow;
+                color: #000;
+            }
+            .list-group-item-info {
+                background-color: #dff0d8;
+                color: #3c763d;
+            }
         </style>
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
         <div class="container">
-            <div class="">
-                <div class="row">
-                    <div class="">
-                        <nav class="" role="">
-                            </div>
-                        </nav>
-                    </div>
-                </div>
+            <div data-bind="css: colorblindModeStatusClass">
                 <div id="songsForSelectedPattern" class="row">
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-heading active">
-                            <div id="noteDropDownWrapper" class="">
-                                <ul class="nav">
-                                    <li class="notesLabel dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="hornChooser">
-                                            Choose your horn: 
-                                            <!-- ko foreach: selectedPatternNotes -->
-                                            <span data-bind="text: text, css: cssClass"></span>
-                                            <!-- /ko -->
-                                            <strong class="caret"></strong>
-                                        </a>
-                                        <div class="dropdown-menu" id="groupPatternContainer">
-                                            <div>
-                                                <ul data-bind="foreach: whitePatterns" class="patternGroup patternGroup-White">
-                                                    <li data-bind="css: cssClass, click: selectMe">
-                                                        <a data-bind="foreach: notes" href="#" class="selectableHorn">
-                                                            <span data-bind="text: text, css: cssClass"></span>
-                                                        </a>
+                            <nav id="navWrapper">
+                                <div id="noteDropDownWrapper" class="">
+                                    <ul class="nav" id="">
+                                        <li class="notesLabel dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="hornChooser">
+                                                Choose your horn:
+                                                <!-- ko foreach: selectedPatternNotes -->
+                                                <span data-bind="text: text, css: cssClass"></span>
+                                                <!-- /ko -->
+                                                <strong class="caret"></strong>
+                                            </a>
+                                            <div class="dropdown-menu" id="groupPatternContainer">
+                                                <div>
+                                                    <ul data-bind="foreach: whitePatterns" class="patternGroup patternGroup-White">
+                                                        <li data-bind="css: cssClass, click: selectMe">
+                                                            <a data-bind="foreach: notes" href="#" class="selectableHorn">
+                                                                <span data-bind="text: text, css: cssClass"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div>
+                                                    <ul data-bind="foreach: purplePatterns" class="patternGroup patternGroup-Purple">
+                                                        <li data-bind="css: cssClass, click: selectMe">
+                                                            <a data-bind="foreach: notes" href="#">
+                                                                <span data-bind="text: text, css: cssClass"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div>
+                                                    <ul data-bind="foreach: orangePatterns" class="patternGroup patternGroup-Orange">
+                                                        <li data-bind="css: cssClass, click: selectMe">
+                                                            <a data-bind="foreach: notes" href="#">
+                                                                <span data-bind="text: text, css: cssClass"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="optionsWrapper">
+                                    <ul class="nav">
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" title="Options" href="#" id="optionsToggle"><span class="glyphicon glyphicon-th-list"></span></a>
+                                            <div class="dropdown-menu">
+                                                <ul class="list-group ">
+                                                    <li class="list-group-item list-group-item-info">Options</li>
+                                                    <li class="list-group-item">
+                                                        <span>
+                                                            <label for="options_ColorblindMode">Colorblind mode: </label>
+                                                            <input type="checkbox" id="options_ColorblindMode" data-bind="checked: colorblindMode" />
+                                                        </span>
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div>
-                                                <ul data-bind="foreach: purplePatterns" class="patternGroup patternGroup-Purple">
-                                                    <li data-bind="css: cssClass, click: selectMe">
-                                                        <a data-bind="foreach: notes" href="#">
-                                                            <span data-bind="text: text, css: cssClass"></span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div>
-                                                <ul data-bind="foreach: orangePatterns" class="patternGroup patternGroup-Orange">
-                                                    <li data-bind="css: cssClass, click: selectMe">
-                                                        <a data-bind="foreach: notes" href="#">
-                                                            <span data-bind="text: text, css: cssClass"></span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="clearfix"></div>
                         </li>
                         <!-- ko foreach: selectedPatternSongs -->
                         <li class="list-group-item">
@@ -162,7 +238,7 @@
                                 </div>
                                 <div class="songDescriptions">
                                     <span class="effects">
-                                        <span class="effect effect1" data-bind="text: effect1"></span> <span class="duration" data-bind="text: duration"></span> <br/> <span data-bind="text: effect2" class="effect effect2"></span> <span data-bind="text: extension" class="duration extension"></span>
+                                        <span class="effect effect1" data-bind="text: effect1"></span> <span class="duration" data-bind="text: duration"></span> <br /> <span data-bind="text: effect2" class="effect effect2"></span> <span data-bind="text: extension" class="duration extension"></span>
                                     </span>
                                 </div>
                             </div>
@@ -187,8 +263,9 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-min.js"></script>
 	<script type="text/javascript">
         $(function () {
-            
-            var viewModel = {};
+            var viewModel = {
+                colorblindModeClass:"colorblindMode"
+            };
             viewModel.patterns = ko.observableArray([]);
             viewModel.whitePatterns = ko.observableArray([]);
             viewModel.orangePatterns = ko.observableArray([]);
@@ -200,6 +277,8 @@
                 cssClass: "selectText",
                 text: "Select..."
             }]);
+            viewModel.colorblindMode = ko.observable(false); // todo: make this cookie-based? Expand options a lot?
+            viewModel.colorblindModeStatusClass = ko.observable("");
 
             function getValueOrReplacementIfHyphen(toTest, replaceWith) {
                 if (toTest == "-") {
@@ -305,7 +384,12 @@
                 }
                 viewModel.selectedPatternSongs(newValue.songs);
                 viewModel.selectedPatternNotes(newValue.notes);
-                console.log("selected pattern changed:", newValue);
+                //console.log("selected pattern changed:", newValue);
+            });
+
+            viewModel.colorblindMode.subscribe(function (newValue) {
+                //console.log("colorblind mode changed: ", newValue)
+                viewModel.colorblindModeStatusClass(newValue ? viewModel.colorblindModeClass : "");
             });
 
             var allPatterns = hhu.data.Songs;

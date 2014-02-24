@@ -177,5 +177,15 @@ namespace MH3UWikiScraper
         public string Effect2 { get; set; }
         public string Duration1 { get; set; }
         public string Extension { get; set; }
+
+        public string Group { get; set; }
+
+        public Dictionary<string, NoteButtonMapping> NoteButtonMappings { get; set; }
+    }
+
+    public class NoteButtonMapping
+    {
+        public string Note { get; set; }
+        public string Button { get; set; }
     }
 }

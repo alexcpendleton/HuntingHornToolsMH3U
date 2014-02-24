@@ -113,6 +113,10 @@ namespace MH3UWikiScraper
         public const string KiranicoLinkKey = "Kiranico";
         public const string WikiLinkKey = "MHWiki";
         public const string GoogleLinkKey = "Google";
+
+        public const string Group_Orange = "o";
+        public const string Group_Purple = "p";
+        public const string Group_White = "w";
     }
 
 }

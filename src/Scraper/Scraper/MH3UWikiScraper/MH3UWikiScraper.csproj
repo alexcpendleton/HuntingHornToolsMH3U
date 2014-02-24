@@ -58,8 +58,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FullDataPack.cs" />
+    <Compile Include="HornSongPair.cs" />
+    <Compile Include="IHuntingHornLinkDeriver.cs" />
+    <Compile Include="KiranicoHornLinkDeriver.cs" />
+    <Compile Include="LinkFiller.cs" />
+    <Compile Include="MonsterHunterWikiLinkDeriver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SongPatternDatum.cs" />
     <Compile Include="SongTableScraper.cs" />
     <Compile Include="WeaponTreeScraper.cs" />
   </ItemGroup>

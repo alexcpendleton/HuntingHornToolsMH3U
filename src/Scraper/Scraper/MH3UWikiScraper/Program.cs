@@ -1,10 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System.CodeDom.Compiler;
 using System.Dynamic;
 using System.IO;
 using System.Web;
+using System.Web.UI.WebControls;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,14 +29,14 @@ namespace MH3UWikiScraper
 
         public static void LoadScrapedOutput()
         {
+#if false
             string inputPath = "Output.json";
             var data = JsonConvert.DeserializeObject<FullDataPack>(File.ReadAllText(inputPath));
 
             var hornSongs = new List<HornSongPair>();
             var allHorns = data.Horns.SelectMany(i => i.Value).ToList();
-            var allSongs = data.Songs.Values.ToList();
+            var allSongs = data.SongPatterns.Values.ToList();
 
-#if false
             foreach (var huntingHorn in allHorns)
             {
                 var pair = new HornSongPair();
@@ -68,138 +68,76 @@ namespace MH3UWikiScraper
             var scraper = new SongTableScraper(document);
             scraper.Document = document;
 
-            var songs = scraper.Scrape();
+            var scrapedSongs = scraper.Scrape();
 
             var weaponDocument = new HtmlDocument();
             weaponDocument.Load("WeaponTreeTable.html");
 
             var weaponScraper = new WeaponTreeScraper(weaponDocument);
-            var mapping = weaponScraper.GetHornMapping();
+            var scrapedHornMapping = weaponScraper.GetHornMapping();
 
             var dataPack = new FullDataPack();
-            dataPack.Songs = songs.Songs;
-            dataPack.Horns = mapping;
+            
+            dataPack.SongPatterns = new Dictionary<string, SongPatternDatum>();
             dataPack.Colors = new List<string>();
 
             var colors = new HashSet<char>();
-            foreach (var item in dataPack.Songs)
+            var songGrouper = new SongGrouper();
+            var songPatterns = dataPack.SongPatterns;
+            foreach (var item in scrapedSongs.Songs)
             {
-                foreach (var c in item.Key.ToCharArray())
+                string pattern = item.Key;
+                if (!songPatterns.ContainsKey(pattern))
+                {
+                    songPatterns[pattern] = new SongPatternDatum();
+                }
+                var datum = songPatterns[pattern];
+
+                foreach (var c in pattern.ToCharArray())
                 {
                     colors.Add(c);
                 }
+
+                datum.Songs = item.Value;
+                datum.Group = songGrouper.DetermineGroup(pattern);
+                datum.Horns = scrapedHornMapping.ContainsKey(pattern) ? scrapedHornMapping[pattern] : new List<HuntingHorn>();
+
+                // TODO!
+                datum.ButtonMappings = new List<NoteButtonMapping>();
             }
+
             dataPack.Colors = colors.Select(i => i.ToString()).ToList();
             dataPack.Colors.Sort();
 
-            dataPack.AvailableNoteCombinations = dataPack.Songs.Keys.ToList();
+            dataPack.AvailableNoteCombinations = dataPack.SongPatterns.Keys.ToList();
 
             string outputPath = "Scraped.json";
             File.WriteAllText(outputPath, JsonConvert.SerializeObject(dataPack, Formatting.Indented));
             
         }
-    }
 
-    public class LinkFiller
-    {
-        public LinkFiller()
+        public class SongGrouper
         {
-            Derivers = new List<IHuntingHornLinkDeriver>
+            /// <summary>
+            /// Determines what group this song is in
+            /// </summary>
+            /// <param name="songPattern"></param>
+            /// <returns></returns>
+            public string DetermineGroup(string notes)
             {
-                new KiranicoHornLinkDeriver(),
-                new MonsterHunterWikiLinkDeriver(),
-            };
-        }
-        public bool ShouldOverwriteExisting { get; set; }
-        public List<IHuntingHornLinkDeriver> Derivers { get; set; }
-
-        public void Fill(IEnumerable<HuntingHorn> horns)
-        {
-            foreach (var huntingHorn in horns)
-            {
-                if (huntingHorn.Links == null)
+                // Orange group can have purple as well, but orange takes priority
+                if (notes.Contains(Constants.Group_Orange))
                 {
-                    huntingHorn.Links = new Dictionary<string, string>();
+                    return Constants.Group_Orange;
                 }
-                
-                foreach (var linkDeriver in Derivers)
+                // If it has purple but not orange, then it goes in purple group
+                if (notes.Contains(Constants.Group_Purple))
                 {
-                    if (ShouldOverwriteExisting || !huntingHorn.Links.ContainsKey(linkDeriver.Key))
-                    {
-                        huntingHorn.Links[linkDeriver.Key] = linkDeriver.DeriveLink(huntingHorn);
-                    }
+                    return Constants.Group_Purple;
                 }
+                // Otherwise it's white
+                return Constants.Group_White;
             }
         }
-    }
-
-
-    public interface IHuntingHornLinkDeriver
-    {
-        string Key { get; }
-        string DeriveLink(HuntingHorn horn);
-    }
-
-    public class MonsterHunterWikiLinkDeriver : IHuntingHornLinkDeriver
-    {
-        public MonsterHunterWikiLinkDeriver()
-        {
-            Domain = "http://monsterhunter.wikia.com";
-            PageFormatString = "/wiki/{0}";
-        }
-        public string Domain { get; set; }
-        public string PageFormatString { get; set; }
-
-        public string FullyQualifyPage(string page)
-        {
-            var builder = new UriBuilder(Domain);
-            builder.Path = page;
-            builder.Port = -1;
-            return builder.ToString();
-        }
-
-        public string DeriveLink(HuntingHorn horn)
-        {
-            string massagedName = horn.Name.Replace(" ", "_");
-            string page = String.Format(PageFormatString, massagedName);
-            return FullyQualifyPage(page);
-        }
-
-        public string Key
-        {
-            get { return Constants.KiranicoLinkKey; }
-        }
-    }
-
-    public class KiranicoHornLinkDeriver : IHuntingHornLinkDeriver
-    {
-        public string BaseUriFormatString = "http://kiranico.com/weapon/huntinghorn/{0}";
-
-        public string DeriveLink(HuntingHorn horn)
-        {
-            string massagedName = horn.Name.ToLower().Replace(" ", "-");
-            return String.Format(BaseUriFormatString, massagedName);
-        }
-
-        public string Key
-        {
-            get { return Constants.KiranicoLinkKey; }
-        }
-    }
-    
-    [DebuggerDisplay("{Horn.Name}, {Horn.NoteKey} (x{Songs.Count})")]
-    public class HornSongPair
-    {
-        public HuntingHorn Horn { get; set; }
-        public List<Song> Songs { get; set; } 
-    }
-
-    public class FullDataPack
-    {
-        public List<string> AvailableNoteCombinations { get; set; }
-        public Dictionary<string, List<Song>> Songs { get; set; }
-        public Dictionary<string, List<HuntingHorn>> Horns { get; set; }
-        public List<string> Colors { get; set; } 
-
     }
 }

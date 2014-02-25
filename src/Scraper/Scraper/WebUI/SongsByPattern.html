@@ -268,6 +268,11 @@
                         </li>
                         <!-- /ko -->
                     </ul>
+                    <div>
+                        <ul data-bind="foreach: selectedPatternHorns" class="horns">
+                            <li><a data-bind="attr: { href: uri}, text: text" target="kiranico"></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -300,6 +305,7 @@
             viewModel.purplePatterns = ko.observableArray([]);
             viewModel.selectedPattern = ko.observable();
             viewModel.selectedPatternSongs = ko.observableArray([]);
+            viewModel.selectedPatternHorns = ko.observableArray([]);
             viewModel.selectedPatternNotes = ko.observableArray([{
                 isActuallyANote: false,
                 cssClass: "selectText",
@@ -307,7 +313,7 @@
             }]);
             viewModel.colorblindMode = ko.observable(true); // todo: make this cookie-based? Expand options a lot?
             viewModel.buttonsMode = ko.observable(true);
-
+            
             function makeModeStatusCss() {
                 var things = [];
                 if (viewModel.colorblindMode()) { things.push(viewModel.colorblindModeClass); }
@@ -349,12 +355,19 @@
                 return results;
             }
             
-            function makeButtonStuff(mappings) {
-                
-            }
-            
             function triggerPatternChange(changeTo) {
                 viewModel.selectedPattern(changeTo);
+            }
+            
+            function HornModel(horn) {
+                var self = this;
+                self.uri = "";
+                self.text = horn.Name;
+                var link = horn.Links["Kiranico"];
+                if (link) {
+                    self.uri = link;
+                }
+                return self;
             }
 
             function SongModel(songDatum, buttonMappings) {
@@ -404,26 +417,18 @@
                 for (var i = 0; i < songs.Songs.length; i++) {
                     building.songs.push(new SongModel(songs.Songs[i], songs.ButtonMappings));
                 }
+                building.horns = [];
+
+                var horns = songs.Horns;
+                for (var i = 0; i < horns.length; i++) {
+                    var horn = horns[i];
+                    building.horns.push(new HornModel(horn));
+                }
                 building.isSelected = ko.observable(false);
                 building.updateCssClass();
                 
                 return building;
             }
-            
-            /*
-            ko.bindingHandlers.selectable = {
-                init: function (element, valueAccessor) {
-                    $(element).attr("id", "selectable").selectable({
-                        selected: function (event, ui) {
-                            vm.selectRequest($(ui.selected).tmplItem().data);
-                        },
-                        unselected: function (event, ui) {
-                            vm.unselectRequest($(ui.unselected).tmplItem().data);
-                        }
-                    });
-                }
-            };
-            */
             
             viewModel.selectedPattern.subscribe(function (newValue) {
                 if (!newValue) return;
@@ -435,6 +440,8 @@
                 }
                 viewModel.selectedPatternSongs(newValue.songs);
                 viewModel.selectedPatternNotes(newValue.notes);
+
+                viewModel.selectedPatternHorns(newValue.horns);
                 //console.log("selected pattern changed:", newValue);
             });
 

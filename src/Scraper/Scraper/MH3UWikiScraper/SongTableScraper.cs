@@ -178,9 +178,9 @@ namespace MH3UWikiScraper
         public string Duration1 { get; set; }
         public string Extension { get; set; }
 
-        public string Group { get; set; }
+        //public string Group { get; set; }
 
-        public Dictionary<string, NoteButtonMapping> NoteButtonMappings { get; set; }
+        //public Dictionary<string, NoteButtonMapping> NoteButtonMappings { get; set; }
     }
 
     public class NoteButtonMapping

@@ -1,4 +1,5 @@
-﻿using System.CodeDom.Compiler;
+﻿using System;
+using System.CodeDom.Compiler;
 using System.Dynamic;
 using System.IO;
 using System.Web;
@@ -81,9 +82,11 @@ namespace MH3UWikiScraper
             dataPack.SongPatterns = new Dictionary<string, SongPatternDatum>();
             dataPack.Colors = new List<string>();
 
-            var colors = new HashSet<char>();
+            var colors = new HashSet<string>();
             var songGrouper = new SongGrouper();
             var songPatterns = dataPack.SongPatterns;
+            var orderedButtons = new[] {"XA", "A", "X"};
+            var linkFiller = new LinkFiller();
             foreach (var item in scrapedSongs.Songs)
             {
                 string pattern = item.Key;
@@ -93,17 +96,18 @@ namespace MH3UWikiScraper
                 }
                 var datum = songPatterns[pattern];
 
-                foreach (var c in pattern.ToCharArray())
+                datum.ButtonMappings = new List<NoteButtonMapping>();
+                for (int i = 0; i < pattern.Length; i++)
                 {
-                    colors.Add(c);
+                    string n = pattern[i].ToString();
+                    string b = orderedButtons[i];
+                    datum.ButtonMappings.Add(new NoteButtonMapping {Button = b, Note = n});
                 }
 
                 datum.Songs = item.Value;
                 datum.Group = songGrouper.DetermineGroup(pattern);
                 datum.Horns = scrapedHornMapping.ContainsKey(pattern) ? scrapedHornMapping[pattern] : new List<HuntingHorn>();
-
-                // TODO!
-                datum.ButtonMappings = new List<NoteButtonMapping>();
+                linkFiller.Fill(datum.Horns);
             }
 
             dataPack.Colors = colors.Select(i => i.ToString()).ToList();
@@ -113,7 +117,20 @@ namespace MH3UWikiScraper
 
             string outputPath = "Scraped.json";
             File.WriteAllText(outputPath, JsonConvert.SerializeObject(dataPack, Formatting.Indented));
-            
+
+            ExportToWeb(dataPack);
+        }
+
+        public static void ExportToWeb(FullDataPack data)
+        {
+            string path = "../../../WebUI/js/HornSongData.js";
+            string stuff = 
+@"var hhu = {
+    data: (replace)    
+}";
+            string output = stuff.Replace("(replace)", JsonConvert.SerializeObject(data, Formatting.Indented));
+            string fullPath = Path.Combine(Environment.CurrentDirectory, path);
+            File.WriteAllText(fullPath, output);
         }
 
         public class SongGrouper

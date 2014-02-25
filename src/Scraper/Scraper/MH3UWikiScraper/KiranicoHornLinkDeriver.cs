@@ -8,7 +8,10 @@ namespace MH3UWikiScraper
 
         public string DeriveLink(HuntingHorn horn)
         {
-            string massagedName = horn.Name.ToLower().Replace(" ", "-");
+            string massagedName = horn.Name.ToLower()
+                .Replace("'", "")
+                .Replace("’", "")
+                .Replace(" ", "-");
             return String.Format(BaseUriFormatString, massagedName);
         }
 

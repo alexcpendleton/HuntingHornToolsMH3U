@@ -29,7 +29,7 @@ namespace MH3UWikiScraper
 
         public string Key
         {
-            get { return Constants.KiranicoLinkKey; }
+            get { return Constants.WikiLinkKey; }
         }
     }
 }

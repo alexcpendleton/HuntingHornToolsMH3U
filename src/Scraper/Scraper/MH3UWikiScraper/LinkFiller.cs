@@ -6,10 +6,11 @@ namespace MH3UWikiScraper
     {
         public LinkFiller()
         {
+            ShouldOverwriteExisting = false;
             Derivers = new List<IHuntingHornLinkDeriver>
             {
                 new KiranicoHornLinkDeriver(),
-                new MonsterHunterWikiLinkDeriver(),
+                //new MonsterHunterWikiLinkDeriver(),
             };
         }
         public bool ShouldOverwriteExisting { get; set; }

@@ -17,7 +17,7 @@
             }
             .hornNote {
                 display: inline-block;
-                width: 18px;
+                width: 22px;
                 height: 18px;
                 line-height: 15px;
                 vertical-align: middle;
@@ -99,15 +99,24 @@
             .duration { font-style: italic; }
             .notesLabel > .dropdown-toggle { padding: 0;}
             #groupPatternContainer {
-                width: 320px;    
+                width: 290px;
+                margin-left: -10px;
             } 
+            
             ul.patternGroup {
-                margin: 0 15px 0 0;
+                margin: 0 10px 0 0;
                 padding: 0;
-                width: 80px;
+                width: 85px;
                 float: left;
             }
-            .patternGroup a { display: block;padding: 5px;}
+            .patternGroup li { list-style: none;}
+            ul.patternGroup-Orange {
+                margin-right: 0;
+            }
+            .patternGroup a {
+                display: block;
+                padding: 5px;
+            }
             .patternGroup a:hover, .patternGroup a:active {
                 text-decoration: none;
                 background: #428bca;
@@ -157,13 +166,19 @@
                 background-color: #dff0d8;
                 color: #3c763d;
             }
-            .aboutText { font-size: 0.8em;}
+            .colorblindModeListGroupItem { display: none;}
+            .aboutText {
+                font-size: 0.8em;
+            }
+            .buttonText { display: none;}
+            .buttonsMode .buttonText { display: inline-block; }
+            .buttonsMode .noteText { display: none;}
         </style>
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
         <div class="container">
-            <div data-bind="css: colorblindModeStatusClass">
+            <div data-bind="css: modeStatusCss">
                 <div id="songsForSelectedPattern" class="row">
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-heading active">
@@ -217,16 +232,21 @@
                                             <div class="dropdown-menu">
                                                 <ul class="list-group ">
                                                     <li class="list-group-item list-group-item-info">Options</li>
-                                                    <li class="list-group-item">
+                                                    <li class="list-group-item colorblindModeListGroupItem">
                                                         <span>
                                                             <label for="options_ColorblindMode">Colorblind mode: </label>
                                                             <input type="checkbox" id="options_ColorblindMode" data-bind="checked: colorblindMode" />
                                                         </span>
                                                     </li>
                                                     <li class="list-group-item">
+                                                        <span>
+                                                            <label for="options_ButtonsMode">Buttons mode: </label>
+                                                            <input type="checkbox" id="options_ButtonsMode" data-bind="checked: buttonsMode" />
+                                                        </span>
+                                                    </li>
+                                                    <li class="list-group-item">
                                                         <span class="aboutText">
-                                                            <p>Version 1.0.0 - <a href="https://github.com/alexcpendleton/HuntingHornToolsMH3U">Alex Pendleton</a></p>
-                                                            <p><a href="http://glyphicons.com/">Glyph Icons</a></p>
+                                                            <p>Version 1.1.0 - <a href="https://github.com/alexcpendleton/HuntingHornToolsMH3U">Alex Pendleton</a></p>
                                                         </span>
                                                     </li>
                                                 </ul>
@@ -240,18 +260,35 @@
                         <!-- ko foreach: selectedPatternSongs -->
                         <li class="list-group-item">
                             <div class="songData">
-                                <div data-bind="foreach: notes" class="songNotes">
-                                    <span data-bind="text: text, css: cssClass"></span>
+                                <div class="songNotes">
+                                    <span data-bind="foreach: notes">
+                                        <span data-bind="css: cssClass">
+                                            <span data-bind="text: text" class="noteText"></span>
+                                            <span data-bind="text: button" class="buttonText"></span>
+                                        </span>
+                                    </span>
                                 </div>
                                 <div class="songDescriptions">
-                                    <span class="effects">
-                                        <span class="effect effect1" data-bind="text: effect1"></span> <span class="duration" data-bind="text: duration"></span> <br /> <span data-bind="text: effect2" class="effect effect2"></span> <span data-bind="text: extension" class="duration extension"></span>
-                                    </span>
+                                    <div class="effects">
+                                        <div id="effect1Container"><span class="effect effect1" data-bind="text: effect1"></span> <span class="duration" data-bind="text: duration, visible: duration"></span></div> 
+                                        <div id="effect2Container" data-bind="visible:effect2">
+                                            <span data-bind="text: effect2, visible:effect2" class="effect effect2"></span> <span data-bind="text: extension, visible:extension" class="duration extension"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                         <!-- /ko -->
                     </ul>
+                    <div id="selectedPatternHornsContainer">
+                        <ul class="horns">
+                            <!-- ko foreach: selectedPatternHorns -->
+                            <li><a data-bind="attr: { href: uri }, text: text" target="kiranico"></a></li>
+                            <!-- /ko -->
+                            <li id="fullTreeContainer"><a href="http://kiranico.com/weapon/huntinghorn">Full Tree*</a></li>
+                            <li id="kiranicoDisclaimer"><em>All horn links open Kiranico.com in a new window.</em></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -259,22 +296,24 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 	<script src="js/vendor/bootstrap.js"></script>
-	<script src="js/HornSongData.js"></script>
+	<script src="js/HornSongData.js?v=110"></script>
 	<script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-34671988-3', ''); // 'github.com');
+      ga('create', 'UA-34671988-3', 'github.com');
       ga('send', 'pageview');
     </script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-min.js"></script>
 	<script type="text/javascript">
-        $(function () {
+        $(function() {
+            
             var viewModel = {
-                colorblindModeClass:"colorblindMode"
+                colorblindModeClass:"colorblindMode",
+                buttonsModeClass:"buttonsMode"
             };
             viewModel.patterns = ko.observableArray([]);
             viewModel.whitePatterns = ko.observableArray([]);
@@ -282,30 +321,51 @@
             viewModel.purplePatterns = ko.observableArray([]);
             viewModel.selectedPattern = ko.observable();
             viewModel.selectedPatternSongs = ko.observableArray([]);
+            viewModel.selectedPatternHorns = ko.observableArray([]);
             viewModel.selectedPatternNotes = ko.observableArray([{
                 isActuallyANote: false,
                 cssClass: "selectText",
                 text: "Select..."
             }]);
-            viewModel.colorblindMode = ko.observable(false); // todo: make this cookie-based? Expand options a lot?
-            viewModel.colorblindModeStatusClass = ko.observable("");
+            viewModel.colorblindMode = ko.observable(true); // todo: make this cookie-based? Expand options a lot?
+            viewModel.buttonsMode = ko.observable(true);
+            
+            function makeModeStatusCss() {
+                var things = [];
+                if (viewModel.colorblindMode()) { things.push(viewModel.colorblindModeClass); }
+                if (viewModel.buttonsMode()) { things.push(viewModel.buttonsModeClass); }
+                return things.join(" ");
+            }
+            
+            viewModel.modeStatusCss = ko.observable(makeModeStatusCss());
 
-            function getValueOrReplacementIfHyphen(toTest, replaceWith) {
+            function getNullIfHyphen(toTest) {
                 if (toTest == "-") {
-                    return replaceWith;
+                    return null;
                 }
                 return toTest;
             }
             
-            function makeNoteStuff(noteKey) {
+            function makeNoteStuff(noteKey, buttonMappings) {
                 var splitNotes = noteKey.split("");
                 var results = [];
+                
                 for (var j = 0; j < splitNotes.length; j++) {
                     var currentNote = splitNotes[j];
+                    var text = currentNote;
+                    var button = "";
+                    if (buttonMappings) {
+                        for (var k = 0; k < buttonMappings.length; k++) {
+                            var x = buttonMappings[k];
+                            if (x.Note == currentNote) {
+                                button = x.Button;
+                            }
+                        }
+                    }
                     results.push({
-                        isActuallyANote:true,
                         cssClass: "hornNote hornNote_" + currentNote,
-                        text: currentNote
+                        text: text,
+                        button: button
                     });
                 }
                 return results;
@@ -314,15 +374,27 @@
             function triggerPatternChange(changeTo) {
                 viewModel.selectedPattern(changeTo);
             }
+            
+            function HornModel(horn) {
+                var self = this;
+                self.uri = "";
+                self.text = horn.Name;
+                var link = horn.Links["Kiranico"];
+                if (link) {
+                    self.uri = link;
+                }
+                return self;
+            }
 
-            function SongModel(songDatum) {
+            function SongModel(songDatum, buttonMappings) {
                 var self = this;
                 self.noteKey = songDatum.NoteKey;
-                self.notes = makeNoteStuff(songDatum.NoteKey);
-                self.effect1 = songDatum.Effect1;
-                self.effect2 = songDatum.Effect2;
-                self.duration = songDatum.Duration1;
-                self.extension = songDatum.Extension;
+                self.notes = makeNoteStuff(songDatum.NoteKey, buttonMappings);
+                self.effect1 = getNullIfHyphen(songDatum.Effect1);
+                self.effect2 = getNullIfHyphen(songDatum.Effect2);
+                self.duration = getNullIfHyphen(songDatum.Duration1);
+                self.extension = getNullIfHyphen(songDatum.Extension);
+                self.buttons = songDatum.ButtonMappings;
                 return self;
             }
 
@@ -358,31 +430,21 @@
                     }
                 }
 
-                for (var i = 0; i < songs.length; i++) {
-                    building.songs.push(new SongModel(songs[i]));
+                for (var i = 0; i < songs.Songs.length; i++) {
+                    building.songs.push(new SongModel(songs.Songs[i], songs.ButtonMappings));
+                }
+                building.horns = [];
+
+                var horns = songs.Horns;
+                for (var i = 0; i < horns.length; i++) {
+                    var horn = horns[i];
+                    building.horns.push(new HornModel(horn));
                 }
                 building.isSelected = ko.observable(false);
-
-                
                 building.updateCssClass();
                 
                 return building;
             }
-            
-            /*
-            ko.bindingHandlers.selectable = {
-                init: function (element, valueAccessor) {
-                    $(element).attr("id", "selectable").selectable({
-                        selected: function (event, ui) {
-                            vm.selectRequest($(ui.selected).tmplItem().data);
-                        },
-                        unselected: function (event, ui) {
-                            vm.unselectRequest($(ui.unselected).tmplItem().data);
-                        }
-                    });
-                }
-            };
-            */
             
             viewModel.selectedPattern.subscribe(function (newValue) {
                 if (!newValue) return;
@@ -394,15 +456,18 @@
                 }
                 viewModel.selectedPatternSongs(newValue.songs);
                 viewModel.selectedPatternNotes(newValue.notes);
-                //console.log("selected pattern changed:", newValue);
+                
+                viewModel.selectedPatternHorns(newValue.horns);
             });
 
-            viewModel.colorblindMode.subscribe(function (newValue) {
-                //console.log("colorblind mode changed: ", newValue)
-                viewModel.colorblindModeStatusClass(newValue ? viewModel.colorblindModeClass : "");
-            });
+            function modeStatusChanged(newValue) {
+                viewModel.modeStatusCss(makeModeStatusCss());
+            }
 
-            var allPatterns = hhu.data.Songs;
+            viewModel.buttonsMode.subscribe(modeStatusChanged);
+            viewModel.colorblindMode.subscribe(modeStatusChanged);
+
+            var allPatterns = hhu.data.SongPatterns;
             var i = 0;
             for (var noteKey in allPatterns) {
                 var current = allPatterns[noteKey];
@@ -418,9 +483,6 @@
                 i = i + 1;
             }
 
-            console.log(viewModel.whitePatterns());
-            console.log(viewModel.purplePatterns());
-            console.log(viewModel.orangePatterns());
             ko.applyBindings(viewModel);
             viewModel.selectedPattern(viewModel.patterns()[0]);
 

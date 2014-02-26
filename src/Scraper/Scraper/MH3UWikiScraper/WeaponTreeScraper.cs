@@ -67,14 +67,21 @@ namespace MH3UWikiScraper
                             }
                             else
                             {
-                                item.Name = Utils.ParseText(bold);
+                                var toParse = bold;
+                                if (bold.ChildNodes.Count() > 0)
+                                {
+                                    // Some bold tags have images and junk in them
+                                    toParse = bold.ChildNodes.Last();
+                                }
+                                item.Name = Utils.ParseText(toParse);
                             }
                         }
 
                         item.Rarity = Utils.ParseText(cells[1]);
                         item.Attack = Utils.ParseText(cells[2]);
                         item.Notes = Utils.ParseColors(cells[3]);
-                        item.NoteKey = Utils.BuildNoteKey(item.Notes, true);
+                        item.NoteKey = Utils.BuildNoteKey(item.Notes, false);
+                        
                         if (String.IsNullOrWhiteSpace(item.NoteKey))
                         {
                             continue;

@@ -31,6 +31,13 @@ namespace MH3UWikiScraper
                 int i = 0;
                 var rows = table.CssSelect("tr");
                 string currentGroupAlphabetized = "";
+                // A few song patterns on the wiki song table page are mislabeled ("wrong" order)
+                // So we patch that up with these (Key = song table version, Value = more correct version)
+                var specialCases = new Dictionary<string, string>
+                {
+                    {"ryw", "yrw"},
+                    {"byp", "ybp" },
+                };
                 foreach (var tr in rows)
                 {
                     i++;
@@ -66,7 +73,12 @@ namespace MH3UWikiScraper
                             {
                                 // First cell will be the group
                                 var colors = Utils.ParseColors(firstCell);
-                                currentGroupAlphabetized = Utils.BuildNoteKey(colors, false);
+                                string noteKey = Utils.BuildNoteKey(colors, false);
+                                if (specialCases.ContainsKey(noteKey))
+                                {
+                                    noteKey = specialCases[noteKey];
+                                }
+                                currentGroupAlphabetized = noteKey;
                             }
                             var item = new Song();
                             var songCell = cells[1 + cellCorrection];

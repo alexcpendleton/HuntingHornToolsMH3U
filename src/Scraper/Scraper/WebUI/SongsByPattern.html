@@ -99,15 +99,24 @@
             .duration { font-style: italic; }
             .notesLabel > .dropdown-toggle { padding: 0;}
             #groupPatternContainer {
-                width: 380px;    
+                width: 290px;
+                margin-left: -10px;
             } 
+            
             ul.patternGroup {
-                margin: 0 15px 0 0;
+                margin: 0 10px 0 0;
                 padding: 0;
-                width: 90px;
+                width: 85px;
                 float: left;
             }
-            .patternGroup a { display: block;padding: 5px;}
+            .patternGroup li { list-style: none;}
+            ul.patternGroup-Orange {
+                margin-right: 0;
+            }
+            .patternGroup a {
+                display: block;
+                padding: 5px;
+            }
             .patternGroup a:hover, .patternGroup a:active {
                 text-decoration: none;
                 background: #428bca;
@@ -237,7 +246,7 @@
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="aboutText">
-                                                            <p>Version 1.1.0 - <a href="http://alexcpendleton.github.com">Alex Pendleton</a></p>
+                                                            <p>Version 1.1.0 - <a href="https://github.com/alexcpendleton/HuntingHornToolsMH3U">Alex Pendleton</a></p>
                                                         </span>
                                                     </li>
                                                 </ul>
@@ -260,17 +269,24 @@
                                     </span>
                                 </div>
                                 <div class="songDescriptions">
-                                    <span class="effects">
-                                        <span class="effect effect1" data-bind="text: effect1"></span> <span class="duration" data-bind="text: duration"></span> <br /> <span data-bind="text: effect2" class="effect effect2"></span> <span data-bind="text: extension" class="duration extension"></span>
-                                    </span>
+                                    <div class="effects">
+                                        <div id="effect1Container"><span class="effect effect1" data-bind="text: effect1"></span> <span class="duration" data-bind="text: duration, visible: duration"></span></div> 
+                                        <div id="effect2Container" data-bind="visible:effect2">
+                                            <span data-bind="text: effect2, visible:effect2" class="effect effect2"></span> <span data-bind="text: extension, visible:extension" class="duration extension"></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </li>
                         <!-- /ko -->
                     </ul>
-                    <div>
-                        <ul data-bind="foreach: selectedPatternHorns" class="horns">
-                            <li><a data-bind="attr: { href: uri}, text: text" target="kiranico"></a></li>
+                    <div id="selectedPatternHornsContainer">
+                        <ul class="horns">
+                            <!-- ko foreach: selectedPatternHorns -->
+                            <li><a data-bind="attr: { href: uri }, text: text" target="kiranico"></a></li>
+                            <!-- /ko -->
+                            <li id="fullTreeContainer"><a href="http://kiranico.com/weapon/huntinghorn">Full Tree*</a></li>
+                            <li id="kiranicoDisclaimer"><em>All horn links open Kiranico.com in a new window.</em></li>
                         </ul>
                     </div>
                 </div>
@@ -287,7 +303,7 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-34671988-3', ''); // 'github.com');
+      ga('create', 'UA-34671988-3', 'github.com');
       ga('send', 'pageview');
     </script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
@@ -323,9 +339,9 @@
             
             viewModel.modeStatusCss = ko.observable(makeModeStatusCss());
 
-            function getValueOrReplacementIfHyphen(toTest, replaceWith) {
+            function getNullIfHyphen(toTest) {
                 if (toTest == "-") {
-                    return replaceWith;
+                    return null;
                 }
                 return toTest;
             }
@@ -374,10 +390,10 @@
                 var self = this;
                 self.noteKey = songDatum.NoteKey;
                 self.notes = makeNoteStuff(songDatum.NoteKey, buttonMappings);
-                self.effect1 = songDatum.Effect1;
-                self.effect2 = songDatum.Effect2;
-                self.duration = songDatum.Duration1;
-                self.extension = songDatum.Extension;
+                self.effect1 = getNullIfHyphen(songDatum.Effect1);
+                self.effect2 = getNullIfHyphen(songDatum.Effect2);
+                self.duration = getNullIfHyphen(songDatum.Duration1);
+                self.extension = getNullIfHyphen(songDatum.Extension);
                 self.buttons = songDatum.ButtonMappings;
                 return self;
             }
@@ -440,9 +456,8 @@
                 }
                 viewModel.selectedPatternSongs(newValue.songs);
                 viewModel.selectedPatternNotes(newValue.notes);
-
+                
                 viewModel.selectedPatternHorns(newValue.horns);
-                //console.log("selected pattern changed:", newValue);
             });
 
             function modeStatusChanged(newValue) {
@@ -468,9 +483,6 @@
                 i = i + 1;
             }
 
-            //console.log(viewModel.whitePatterns());
-            //console.log(viewModel.purplePatterns());
-            //console.log(viewModel.orangePatterns());
             ko.applyBindings(viewModel);
             viewModel.selectedPattern(viewModel.patterns()[0]);
 

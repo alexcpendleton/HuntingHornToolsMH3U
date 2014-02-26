@@ -4,7 +4,7 @@ var hhu = {
     "brw",
     "grw",
     "arw",
-    "ryw",
+    "yrw",
     "gbw",
     "abw",
     "ybw",
@@ -17,7 +17,7 @@ var hhu = {
     "yrp",
     "gbp",
     "abp",
-    "byp",
+    "ybp",
     "agp",
     "ygp",
     "yap",
@@ -359,21 +359,6 @@ var hhu = {
           "Links": {
             "Kiranico": "http://kiranico.com/weapon/huntinghorn/glacial-kazoo"
           }
-        },
-        {
-          "Name": "Voltage Verve",
-          "Rarity": "4",
-          "Attack": "598",
-          "Notes": [
-            "r",
-            "g",
-            "w"
-          ],
-          "NoteKey": "grw",
-          "Links": {
-            "MHWiki": "http://monsterhunter.wikia.com/wiki/Voltage_Verve",
-            "Kiranico": "http://kiranico.com/weapon/huntinghorn/voltage-verve"
-          }
         }
       ]
     },
@@ -515,15 +500,15 @@ var hhu = {
         }
       ]
     },
-    "ryw": {
+    "yrw": {
       "Group": "w",
       "ButtonMappings": [
         {
-          "Note": "r",
+          "Note": "y",
           "Button": "XA"
         },
         {
-          "Note": "y",
+          "Note": "r",
           "Button": "A"
         },
         {
@@ -569,7 +554,78 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Agnakdion",
+          "Rarity": "5",
+          "Attack": "828",
+          "Notes": [
+            "y",
+            "r",
+            "w"
+          ],
+          "NoteKey": "yrw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/agnakdion"
+          }
+        },
+        {
+          "Name": "Brandoneon",
+          "Rarity": "6",
+          "Attack": "920",
+          "Notes": [
+            "y",
+            "r",
+            "w"
+          ],
+          "NoteKey": "yrw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/brandoneon"
+          }
+        },
+        {
+          "Name": "Zurogong Primo",
+          "Rarity": "1",
+          "Attack": "552",
+          "Notes": [
+            "y",
+            "r",
+            "w"
+          ],
+          "NoteKey": "yrw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/zurogong-primo"
+          }
+        },
+        {
+          "Name": "Zurogong Secundo",
+          "Rarity": "2",
+          "Attack": "598",
+          "Notes": [
+            "y",
+            "r",
+            "w"
+          ],
+          "NoteKey": "yrw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/zurogong-secundo"
+          }
+        },
+        {
+          "Name": "Zurogong Tertio",
+          "Rarity": "4",
+          "Attack": "874",
+          "Notes": [
+            "y",
+            "r",
+            "w"
+          ],
+          "NoteKey": "yrw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/zurogong-tertio"
+          }
+        }
+      ]
     },
     "gbw": {
       "Group": "w",
@@ -650,7 +706,92 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Droth Drone",
+          "Rarity": "2",
+          "Attack": "506",
+          "Notes": [
+            "g",
+            "b",
+            "w"
+          ],
+          "NoteKey": "gbw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/droth-drone"
+          }
+        },
+        {
+          "Name": "Droth Drone+",
+          "Rarity": "3",
+          "Attack": "644",
+          "Notes": [
+            "g",
+            "b",
+            "w"
+          ],
+          "NoteKey": "gbw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/droth-drone+"
+          }
+        },
+        {
+          "Name": "Droth Roar",
+          "Rarity": "5",
+          "Attack": "920",
+          "Notes": [
+            "g",
+            "b",
+            "w"
+          ],
+          "NoteKey": "gbw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/droth-roar"
+          }
+        },
+        {
+          "Name": "Black Coffin",
+          "Rarity": "3",
+          "Attack": "506",
+          "Notes": [
+            "g",
+            "b",
+            "w"
+          ],
+          "NoteKey": "gbw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/black-coffin"
+          }
+        },
+        {
+          "Name": "Shadow Coffin",
+          "Rarity": "4",
+          "Attack": "644",
+          "Notes": [
+            "g",
+            "b",
+            "w"
+          ],
+          "NoteKey": "gbw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/shadow-coffin"
+          }
+        },
+        {
+          "Name": "Bloodstopper",
+          "Rarity": "5",
+          "Attack": "828",
+          "Notes": [
+            "g",
+            "b",
+            "w"
+          ],
+          "NoteKey": "gbw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/bloodstopper"
+          }
+        }
+      ]
     },
     "abw": {
       "Group": "w",
@@ -855,7 +996,134 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Bone Horn",
+          "Rarity": "1",
+          "Attack": "368",
+          "Notes": [
+            "y",
+            "b",
+            "w"
+          ],
+          "NoteKey": "ybw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/bone-horn"
+          }
+        },
+        {
+          "Name": "Bone Horn+",
+          "Rarity": "1",
+          "Attack": "414",
+          "Notes": [
+            "y",
+            "b",
+            "w"
+          ],
+          "NoteKey": "ybw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/bone-horn+"
+          }
+        },
+        {
+          "Name": "Hunter's Horn",
+          "Rarity": "2",
+          "Attack": "506",
+          "Notes": [
+            "y",
+            "b",
+            "w"
+          ],
+          "NoteKey": "ybw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/hunters-horn"
+          }
+        },
+        {
+          "Name": "Hunter's Horn+",
+          "Rarity": "3",
+          "Attack": "644",
+          "Notes": [
+            "y",
+            "b",
+            "w"
+          ],
+          "NoteKey": "ybw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/hunters-horn+"
+          }
+        },
+        {
+          "Name": "Swell Shell",
+          "Rarity": "4",
+          "Attack": "690",
+          "Notes": [
+            "y",
+            "b",
+            "w"
+          ],
+          "NoteKey": "ybw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/swell-shell"
+          }
+        },
+        {
+          "Name": "Vertex Shell",
+          "Rarity": "5",
+          "Attack": "782",
+          "Notes": [
+            "y",
+            "b",
+            "w"
+          ],
+          "NoteKey": "ybw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vertex-shell"
+          }
+        },
+        {
+          "Name": "Valkyrie Chordmaker",
+          "Rarity": "3",
+          "Attack": "552",
+          "Notes": [
+            "y",
+            "b",
+            "w"
+          ],
+          "NoteKey": "ybw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/valkyrie-chordmaker"
+          }
+        },
+        {
+          "Name": "Valkyrie Chordmaker+",
+          "Rarity": "4",
+          "Attack": "690",
+          "Notes": [
+            "y",
+            "b",
+            "w"
+          ],
+          "NoteKey": "ybw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/valkyrie-chordmaker+"
+          }
+        },
+        {
+          "Name": "Queen’s Chordmaker",
+          "Rarity": "5",
+          "Attack": "782",
+          "Notes": [
+            "y",
+            "b",
+            "w"
+          ],
+          "NoteKey": "ybw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/queens-chordmaker"
+          }
+        }
+      ]
     },
     "agw": {
       "Group": "w",
@@ -1065,7 +1333,134 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Vicello Nulo",
+          "Rarity": "1",
+          "Attack": "414",
+          "Notes": [
+            "y",
+            "g",
+            "w"
+          ],
+          "NoteKey": "ygw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-nulo"
+          }
+        },
+        {
+          "Name": "Vicello Unu",
+          "Rarity": "2",
+          "Attack": "460",
+          "Notes": [
+            "y",
+            "g",
+            "w"
+          ],
+          "NoteKey": "ygw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-unu"
+          }
+        },
+        {
+          "Name": "Vicello Nulo (W)",
+          "Rarity": "3",
+          "Attack": "552",
+          "Notes": [
+            "y",
+            "g",
+            "w"
+          ],
+          "NoteKey": "ygw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-nulo-w"
+          }
+        },
+        {
+          "Name": "Vicello Unu (W)",
+          "Rarity": "5",
+          "Attack": "736",
+          "Notes": [
+            "y",
+            "g",
+            "w"
+          ],
+          "NoteKey": "ygw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-unu-w"
+          }
+        },
+        {
+          "Name": "Vicello Nulo (Y)",
+          "Rarity": "3",
+          "Attack": "460",
+          "Notes": [
+            "y",
+            "g",
+            "w"
+          ],
+          "NoteKey": "ygw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-nulo-y"
+          }
+        },
+        {
+          "Name": "Vicello Unu (Y)",
+          "Rarity": "4",
+          "Attack": "552",
+          "Notes": [
+            "y",
+            "g",
+            "w"
+          ],
+          "NoteKey": "ygw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-unu-y"
+          }
+        },
+        {
+          "Name": "Vicello Nulo (G)",
+          "Rarity": "2",
+          "Attack": "414",
+          "Notes": [
+            "y",
+            "g",
+            "w"
+          ],
+          "NoteKey": "ygw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-nulo-g"
+          }
+        },
+        {
+          "Name": "Vicello Unu (G)",
+          "Rarity": "3",
+          "Attack": "506",
+          "Notes": [
+            "y",
+            "g",
+            "w"
+          ],
+          "NoteKey": "ygw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-unu-g"
+          }
+        },
+        {
+          "Name": "Vicello Du (G)",
+          "Rarity": "5",
+          "Attack": "690",
+          "Notes": [
+            "y",
+            "g",
+            "w"
+          ],
+          "NoteKey": "ygw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-du-g"
+          }
+        }
+      ]
     },
     "yaw": {
       "Group": "w",
@@ -1170,7 +1565,64 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Magia Charm",
+          "Rarity": "4",
+          "Attack": "552",
+          "Notes": [
+            "y",
+            "a",
+            "w"
+          ],
+          "NoteKey": "yaw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/magia-charm"
+          }
+        },
+        {
+          "Name": "Magia Charmbell",
+          "Rarity": "5",
+          "Attack": "644",
+          "Notes": [
+            "y",
+            "a",
+            "w"
+          ],
+          "NoteKey": "yaw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/magia-charmbell"
+          }
+        },
+        {
+          "Name": "Dios Bell",
+          "Rarity": "5",
+          "Attack": "874",
+          "Notes": [
+            "y",
+            "a",
+            "w"
+          ],
+          "NoteKey": "yaw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/dios-bell"
+          }
+        },
+        {
+          "Name": "Dios Bell+",
+          "Rarity": "6",
+          "Attack": "920",
+          "Notes": [
+            "y",
+            "a",
+            "w"
+          ],
+          "NoteKey": "yaw",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/dios-bell+"
+          }
+        }
+      ]
     },
     "brp": {
       "Group": "p",
@@ -1241,7 +1693,38 @@ var hhu = {
           "Extension": "+120(+180)"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Rinforzato",
+          "Rarity": "8",
+          "Attack": "1012",
+          "Notes": [
+            "b",
+            "r",
+            "p"
+          ],
+          "NoteKey": "brp",
+          "Links": {
+            "MHWiki": "http://monsterhunter.wikia.com/wiki/Rinforzato%3Faction=edit&amp;redlink=1",
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/rinforzato"
+          }
+        },
+        {
+          "Name": "Cry in the Night",
+          "Rarity": "9",
+          "Attack": "966",
+          "Notes": [
+            "b",
+            "r",
+            "p"
+          ],
+          "NoteKey": "brp",
+          "Links": {
+            "MHWiki": "http://monsterhunter.wikia.com/wiki/Cry_in_the_Night%3Faction=edit&amp;redlink=1",
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/cry-in-the-night"
+          }
+        }
+      ]
     },
     "grp": {
       "Group": "p",
@@ -1299,7 +1782,37 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Sandsinger",
+          "Rarity": "8",
+          "Attack": "1104",
+          "Notes": [
+            "g",
+            "r",
+            "p"
+          ],
+          "NoteKey": "grp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/sandsinger"
+          }
+        },
+        {
+          "Name": "Sandsoother",
+          "Rarity": "9",
+          "Attack": "1242",
+          "Notes": [
+            "g",
+            "r",
+            "p"
+          ],
+          "NoteKey": "grp",
+          "Links": {
+            "MHWiki": "http://monsterhunter.wikia.com/wiki/Sandsoother",
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/sandsoother"
+          }
+        }
+      ]
     },
     "arp": {
       "Group": "p",
@@ -1381,7 +1894,64 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Frigiguiro",
+          "Rarity": "9",
+          "Attack": "1058",
+          "Notes": [
+            "a",
+            "r",
+            "p"
+          ],
+          "NoteKey": "arp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/frigiguiro"
+          }
+        },
+        {
+          "Name": "Archgigas Gaita",
+          "Rarity": "9",
+          "Attack": "1196",
+          "Notes": [
+            "a",
+            "r",
+            "p"
+          ],
+          "NoteKey": "arp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/archgigas-gaita"
+          }
+        },
+        {
+          "Name": "Worn Horn",
+          "Rarity": "8",
+          "Attack": "506",
+          "Notes": [
+            "a",
+            "r",
+            "p"
+          ],
+          "NoteKey": "arp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/worn-horn"
+          }
+        },
+        {
+          "Name": "Weathered Horn",
+          "Rarity": "8",
+          "Attack": "506",
+          "Notes": [
+            "a",
+            "r",
+            "p"
+          ],
+          "NoteKey": "arp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/weathered-horn"
+          }
+        }
+      ]
     },
     "yrp": {
       "Group": "p",
@@ -1437,7 +2007,50 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Frost Groaner",
+          "Rarity": "8",
+          "Attack": "1058",
+          "Notes": [
+            "y",
+            "r",
+            "p"
+          ],
+          "NoteKey": "yrp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/frost-groaner"
+          }
+        },
+        {
+          "Name": "Frost General",
+          "Rarity": "9",
+          "Attack": "1196",
+          "Notes": [
+            "y",
+            "r",
+            "p"
+          ],
+          "NoteKey": "yrp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/frost-general"
+          }
+        },
+        {
+          "Name": "Scaldertina",
+          "Rarity": "9",
+          "Attack": "1104",
+          "Notes": [
+            "y",
+            "r",
+            "p"
+          ],
+          "NoteKey": "yrp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/scaldertina"
+          }
+        }
+      ]
     },
     "gbp": {
       "Group": "p",
@@ -1520,7 +2133,50 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Darkest Coffin",
+          "Rarity": "8",
+          "Attack": "1012",
+          "Notes": [
+            "g",
+            "b",
+            "p"
+          ],
+          "NoteKey": "gbp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/darkest-coffin"
+          }
+        },
+        {
+          "Name": "Bloodcurtler",
+          "Rarity": "8",
+          "Attack": "874",
+          "Notes": [
+            "g",
+            "b",
+            "p"
+          ],
+          "NoteKey": "gbp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/bloodcurtler"
+          }
+        },
+        {
+          "Name": "Bloodfreezer",
+          "Rarity": "8",
+          "Attack": "966",
+          "Notes": [
+            "g",
+            "b",
+            "p"
+          ],
+          "NoteKey": "gbp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/bloodfreezer"
+          }
+        }
+      ]
     },
     "abp": {
       "Group": "p",
@@ -1633,15 +2289,15 @@ var hhu = {
         }
       ]
     },
-    "byp": {
+    "ybp": {
       "Group": "p",
       "ButtonMappings": [
         {
-          "Note": "b",
+          "Note": "y",
           "Button": "XA"
         },
         {
-          "Note": "y",
+          "Note": "b",
           "Button": "A"
         },
         {
@@ -1713,7 +2369,50 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Turban Shell",
+          "Rarity": "8",
+          "Attack": "1012",
+          "Notes": [
+            "y",
+            "b",
+            "p"
+          ],
+          "NoteKey": "ybp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/turban-shell"
+          }
+        },
+        {
+          "Name": "Coral Chordmaker",
+          "Rarity": "8",
+          "Attack": "1012",
+          "Notes": [
+            "y",
+            "b",
+            "p"
+          ],
+          "NoteKey": "ybp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/coral-chordmaker"
+          }
+        },
+        {
+          "Name": "Coral Chordmaker+",
+          "Rarity": "9",
+          "Attack": "1104",
+          "Notes": [
+            "y",
+            "b",
+            "p"
+          ],
+          "NoteKey": "ybp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/coral-chordmaker+"
+          }
+        }
+      ]
     },
     "agp": {
       "Group": "p",
@@ -1920,7 +2619,50 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Vicello Du (W)",
+          "Rarity": "8",
+          "Attack": "920",
+          "Notes": [
+            "y",
+            "g",
+            "p"
+          ],
+          "NoteKey": "ygp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-du-w"
+          }
+        },
+        {
+          "Name": "Vicello Du (Y)",
+          "Rarity": "8",
+          "Attack": "966",
+          "Notes": [
+            "y",
+            "g",
+            "p"
+          ],
+          "NoteKey": "ygp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-du-y"
+          }
+        },
+        {
+          "Name": "Vicello Tri (G)",
+          "Rarity": "8",
+          "Attack": "828",
+          "Notes": [
+            "y",
+            "g",
+            "p"
+          ],
+          "NoteKey": "ygp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/vicello-tri-g"
+          }
+        }
+      ]
     },
     "yap": {
       "Group": "p",
@@ -2025,7 +2767,22 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Aria Rhota",
+          "Rarity": "8",
+          "Attack": "828",
+          "Notes": [
+            "y",
+            "a",
+            "p"
+          ],
+          "NoteKey": "yap",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/aria-rhota"
+          }
+        }
+      ]
     },
     "orp": {
       "Group": "o",
@@ -2083,7 +2840,38 @@ var hhu = {
           "Extension": "+30(+40)"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Brimstren Drakesong",
+          "Rarity": "9",
+          "Attack": "1058",
+          "Notes": [
+            "o",
+            "r",
+            "p"
+          ],
+          "NoteKey": "orp",
+          "Links": {
+            "MHWiki": "http://monsterhunter.wikia.com/wiki/Brimstren_Drakesong%3Faction=edit&amp;redlink=1",
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/brimstren-drakesong"
+          }
+        },
+        {
+          "Name": "Stygian Tristitia",
+          "Rarity": "9",
+          "Attack": "1150",
+          "Notes": [
+            "o",
+            "r",
+            "p"
+          ],
+          "NoteKey": "orp",
+          "Links": {
+            "MHWiki": "http://monsterhunter.wikia.com/wiki/Stygian_Tristitia%3Faction=edit&amp;redlink=1",
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/stygian-tristitia"
+          }
+        }
+      ]
     },
     "obp": {
       "Group": "o",
@@ -2154,7 +2942,36 @@ var hhu = {
           "Extension": "+120(+180)"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Nether Flute",
+          "Rarity": "10",
+          "Attack": "1150",
+          "Notes": [
+            "o",
+            "b",
+            "p"
+          ],
+          "NoteKey": "obp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/nether-flute"
+          }
+        },
+        {
+          "Name": "Nether Sinphony",
+          "Rarity": "10",
+          "Attack": "1196",
+          "Notes": [
+            "o",
+            "b",
+            "p"
+          ],
+          "NoteKey": "obp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/nether-sinphony"
+          }
+        }
+      ]
     },
     "oap": {
       "Group": "o",
@@ -2225,7 +3042,36 @@ var hhu = {
           "Extension": "+60(+90)"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Gold Chordmaker",
+          "Rarity": "10",
+          "Attack": "1150",
+          "Notes": [
+            "o",
+            "a",
+            "p"
+          ],
+          "NoteKey": "oap",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/gold-chordmaker"
+          }
+        },
+        {
+          "Name": "Lunar Chordmaker",
+          "Rarity": "10",
+          "Attack": "1196",
+          "Notes": [
+            "o",
+            "a",
+            "p"
+          ],
+          "NoteKey": "oap",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/lunar-chordmaker"
+          }
+        }
+      ]
     },
     "ogp": {
       "Group": "o",
@@ -2283,7 +3129,79 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Eclipse Tone",
+          "Rarity": "10",
+          "Attack": "1058",
+          "Notes": [
+            "o",
+            "g",
+            "p"
+          ],
+          "NoteKey": "ogp",
+          "Links": {
+            "MHWiki": "http://monsterhunter.wikia.com/wiki/Eclipse_Tone%3Faction=edit&amp;redlink=1",
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/eclipse-tone"
+          }
+        },
+        {
+          "Name": "Demolition Chime",
+          "Rarity": "9",
+          "Attack": "1150",
+          "Notes": [
+            "o",
+            "g",
+            "p"
+          ],
+          "NoteKey": "ogp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/demolition-chime"
+          }
+        },
+        {
+          "Name": "Timbral Demolisher",
+          "Rarity": "9",
+          "Attack": "1242",
+          "Notes": [
+            "o",
+            "g",
+            "p"
+          ],
+          "NoteKey": "ogp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/timbral-demolisher"
+          }
+        },
+        {
+          "Name": "Avenir’s Music Box",
+          "Rarity": "9",
+          "Attack": "920",
+          "Notes": [
+            "o",
+            "g",
+            "p"
+          ],
+          "NoteKey": "ogp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/avenirs-music-box"
+          }
+        },
+        {
+          "Name": "Eternal Music Box",
+          "Rarity": "9",
+          "Attack": "1058",
+          "Notes": [
+            "o",
+            "g",
+            "p"
+          ],
+          "NoteKey": "ogp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/eternal-music-box"
+          }
+        }
+      ]
     },
     "oyp": {
       "Group": "o",
@@ -2366,7 +3284,36 @@ var hhu = {
           "Extension": "-"
         }
       ],
-      "Horns": []
+      "Horns": [
+        {
+          "Name": "Megiddo Mode",
+          "Rarity": "10",
+          "Attack": "920",
+          "Notes": [
+            "o",
+            "y",
+            "p"
+          ],
+          "NoteKey": "oyp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/megiddo-mode"
+          }
+        },
+        {
+          "Name": "The Apocalypso",
+          "Rarity": "10",
+          "Attack": "966",
+          "Notes": [
+            "o",
+            "y",
+            "p"
+          ],
+          "NoteKey": "oyp",
+          "Links": {
+            "Kiranico": "http://kiranico.com/weapon/huntinghorn/the-apocalypso"
+          }
+        }
+      ]
     }
   },
   "Colors": []

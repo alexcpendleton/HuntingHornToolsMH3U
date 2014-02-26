@@ -11,7 +11,9 @@ namespace MH3UWikiScraper
             string massagedName = horn.Name.ToLower()
                 .Replace("'", "")
                 .Replace("’", "")
-                .Replace(" ", "-");
+                .Replace(" ", "-")
+                .Replace("(", "")
+                .Replace(")", "");
             return String.Format(BaseUriFormatString, massagedName);
         }
 

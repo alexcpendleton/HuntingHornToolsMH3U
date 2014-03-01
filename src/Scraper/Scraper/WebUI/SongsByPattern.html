@@ -63,6 +63,8 @@
             #hornChooser {
                 color: #fff;
                 font-weight: bold;
+                padding: 0;
+                position: relative;
             }
             #hornChooser:hover, #hornChooser:active, .open #hornChooser {
                 background: transparent;
@@ -97,10 +99,15 @@
             .effects { display: block;}
             .effect { font-weight: bold;}
             .duration { font-style: italic; }
-            .notesLabel > .dropdown-toggle { padding: 0;}
+
             #groupPatternContainer {
                 width: 290px;
+                margin-top: 5px;
                 margin-left: -10px;
+                padding: 5px 2px;
+                display: none;
+                background-color: #ffffff;
+                position: absolute;
             } 
             
             ul.patternGroup {
@@ -186,14 +193,14 @@
                                 <div id="noteDropDownWrapper" class="">
                                     <ul class="nav" id="">
                                         <li class="notesLabel dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="hornChooser">
+                                            <a class="" data-toggle="" href="#" id="hornChooser">
                                                 Choose your horn:
                                                 <!-- ko foreach: selectedPatternNotes -->
                                                 <span data-bind="text: text, css: cssClass"></span>
                                                 <!-- /ko -->
                                                 <strong class="caret"></strong>
                                             </a>
-                                            <div class="dropdown-menu" id="groupPatternContainer">
+                                            <div class="well well-sm" id="groupPatternContainer">
                                                 <div>
                                                     <ul data-bind="foreach: whitePatterns" class="patternGroup patternGroup-White">
                                                         <li data-bind="css: cssClass, click: selectMe">
@@ -486,7 +493,40 @@
             ko.applyBindings(viewModel);
             viewModel.selectedPattern(viewModel.patterns()[0]);
 
-            $(function () {
+            $(function() {
+                var $settings = {
+                    
+                };
+                var $doc = $(document);
+                var patternContainer = $("#groupPatternContainer");
+                function openPatternContainer() {
+                    patternContainer.show();
+                }
+                function closePatternContainer() {
+                    patternContainer.hide();
+                }
+                function togglePatternContainer() {
+                    if(!patternContainer.is(":visible")) {
+                        openPatternContainer();
+                    } else {
+                        closePatternContainer();
+                    }
+                }
+                viewModel.selectedPattern.subscribe(function() {
+                    closePatternContainer();
+                });
+                $doc.on("click", "#hornChooser", function(ev) {
+                    togglePatternContainer();
+                    ev.stopPropagation();
+                });
+                $doc.on("click", "#groupPatternContainer", function(ev) {
+                    ev.stopPropagation();
+                });
+                // This needs to be last, catches any stray doc clicks to close open dialogs
+                $doc.on("click", function(ev) {
+                    console.log("other click");
+                    closePatternContainer();
+                });
             });
         });
 	</script>

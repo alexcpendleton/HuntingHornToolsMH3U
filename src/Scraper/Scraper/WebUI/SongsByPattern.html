@@ -9,178 +9,9 @@
         <title>MH3U Songs by Horn Pattern Reference -  Hunting Horn? More like FUNting Horn!</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <style>
-            body {
-				background:#fff;
-            }
-            .hornNote {
-                display: inline-block;
-                width: 22px;
-                height: 18px;
-                line-height: 15px;
-                vertical-align: middle;
-                text-align: center;
-                font-weight: bold;
-
-                background: no-repeat center center;
-                color: transparent;
-            }
-            .hornNote_a {
-                background-image: url(img/note_a.png);
-            }
-            .hornNote_b {
-                background-image: url(img/note_b.png);
-            }
-            .hornNote_g {
-                background-image: url(img/note_g.png);
-            }
-            .hornNote_o {
-                background-image: url(img/note_o.png);
-            }
-            .hornNote_p {
-                background-image: url(img/note_p.png);
-            }
-            .hornNote_r {
-                background-image: url(img/note_r.png);
-            }
-            .hornNote_w {
-                background-image: url(img/note_w.png);
-            }
-            .hornNote_y {
-                background-image: url(img/note_y.png);
-            }
-
-            .patternSelected {
-                background: skyblue;
-            }
-
-            .container { max-width: 730px; }
-            #songsForSelectedPattern .list-group-item-heading {
-                 margin-bottom: 0;
-            }
-            #hornChooser {
-                color: #fff;
-                font-weight: bold;
-                padding: 0;
-                position: relative;
-            }
-            #hornChooser:hover, #hornChooser:active, .open #hornChooser {
-                background: transparent;
-            }
-            #hornChooser .caret {
-                border-top-color: #fff !important;
-                border-bottom-color: #fff !important;
-            }
-            #navWrapper { position: relative;overflow: visible;}
-            #noteDropDownWrapper { float: left;width: 49%;}
-            #optionsWrapper { float: right;width:30px;color: #000;text-align: right;}
-            #optionsWrapper a, #optionsWrapper a:hover, #optionsWrapper .open a {
-                background: transparent;
-                padding: 0;
-            }
-            #optionsWrapper .dropdown-menu {
-                padding: 0;margin-left: -140px;width: 180px;
-            }
-            #optionsWrapper .glyphicon {
-                color: #fff;
-                font-size: 16pt;
-            }
-            #optionsWrapper label { font-weight: normal;}
-            #optionsWrapper .list-group { text-align: left;color: #000;margin-bottom: 0;}
-            .songDescriptions .durations {}
-            .songData {
-                
-                vertical-align: middle;
-            }
-            .songNotes {display: block;}
-            .songNotes .hornNote { }
-            .effects { display: block;}
-            .effect { font-weight: bold;}
-            .duration { font-style: italic; }
-
-            #groupPatternContainer {
-                width: 290px;
-                margin-top: 5px;
-                margin-left: -10px;
-                padding: 5px 2px;
-                display: none;
-                background-color: #ffffff;
-                position: absolute;
-            } 
-            
-            ul.patternGroup {
-                margin: 0 10px 0 0;
-                padding: 0;
-                width: 85px;
-                float: left;
-            }
-            .patternGroup li { list-style: none;}
-            ul.patternGroup-Orange {
-                margin-right: 0;
-            }
-            .patternGroup a {
-                display: block;
-                padding: 5px;
-            }
-            .patternGroup a:hover, .patternGroup a:active {
-                text-decoration: none;
-                background: #428bca;
-            }
-
-
-            .colorblindMode .hornNote {
-                color: #FFF;background-image: none;border: solid 1px #000;
-                text-transform: uppercase
-            }
-
-            .colorblindMode .hornNote_a {
-                background-color: aqua;
-                color: #000;
-            }
-
-            .colorblindMode .hornNote_b {
-                background-color: blue;
-            }
-
-            .colorblindMode .hornNote_g {
-                background-color: green;
-            }
-
-            .colorblindMode .hornNote_o {
-                background-color: orange;
-            }
-
-            .colorblindMode .hornNote_p {
-                background-color: purple;
-            }
-
-            .colorblindMode .hornNote_r {
-                background-color: red;
-            }
-
-            .colorblindMode .hornNote_w {
-                background-color: white;
-                color: #000;
-            }
-
-            .colorblindMode .hornNote_y {
-                background-color: yellow;
-                color: #000;
-            }
-            .list-group-item-info {
-                background-color: #dff0d8;
-                color: #3c763d;
-            }
-            .colorblindModeListGroupItem { display: none;}
-            .aboutText {
-                font-size: 0.8em;
-            }
-            .buttonText { display: none;}
-            .buttonsMode .buttonText { display: inline-block; }
-            .buttonsMode .noteText { display: none;}
-        </style>
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css"/>
+        <link rel="stylesheet" href="css/main.css?v=111.1">
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -192,7 +23,7 @@
                             <nav id="navWrapper">
                                 <div id="noteDropDownWrapper" class="">
                                     <ul class="nav" id="">
-                                        <li class="notesLabel dropdown">
+                                        <li class="notesLabel dropdown" id="menuContainer">
                                             <a class="" data-toggle="" href="#" id="hornChooser">
                                                 Choose your horn:
                                                 <!-- ko foreach: selectedPatternNotes -->
@@ -200,33 +31,67 @@
                                                 <!-- /ko -->
                                                 <strong class="caret"></strong>
                                             </a>
-                                            <div class="well well-sm" id="groupPatternContainer">
-                                                <div>
-                                                    <ul data-bind="foreach: whitePatterns" class="patternGroup patternGroup-White">
-                                                        <li data-bind="css: cssClass, click: selectMe">
-                                                            <a data-bind="foreach: notes" href="#" class="selectableHorn">
-                                                                <span data-bind="text: text, css: cssClass"></span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
+                                            <div class="tabContainer">
+                                                <ul class="">
+                                                    <li><a href="#groupPatternContainer" class="">Patterns</a></li>
+                                                    <li><a href="#mainSearchContainer" class="">Search</a></li>
+                                                </ul>
+                                                <div class="" id="groupPatternContainer"> 
+                                                    <div>
+                                                        <ul data-bind="foreach: whitePatterns" class="patternGroup patternGroup-White">
+                                                            <li data-bind="css: cssClass, click: selectMe">
+                                                                <a data-bind="foreach: notes" href="#" class="selectableHorn">
+                                                                    <span data-bind="text: text, css: cssClass"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div>
+                                                        <ul data-bind="foreach: purplePatterns" class="patternGroup patternGroup-Purple">
+                                                            <li data-bind="css: cssClass, click: selectMe">
+                                                                <a data-bind="foreach: notes" href="#">
+                                                                    <span data-bind="text: text, css: cssClass"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div>
+                                                        <ul data-bind="foreach: orangePatterns" class="patternGroup patternGroup-Orange">
+                                                            <li data-bind="css: cssClass, click: selectMe">
+                                                                <a data-bind="foreach: notes" href="#">
+                                                                    <span data-bind="text: text, css: cssClass"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <ul data-bind="foreach: purplePatterns" class="patternGroup patternGroup-Purple">
-                                                        <li data-bind="css: cssClass, click: selectMe">
-                                                            <a data-bind="foreach: notes" href="#">
-                                                                <span data-bind="text: text, css: cssClass"></span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <ul data-bind="foreach: orangePatterns" class="patternGroup patternGroup-Orange">
-                                                        <li data-bind="css: cssClass, click: selectMe">
-                                                            <a data-bind="foreach: notes" href="#">
-                                                                <span data-bind="text: text, css: cssClass"></span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
+                                                <div id="mainSearchContainer" class="">
+                                                    <div id="">
+                                                        <div id="mainSearchInputContainer" class="list-group-item list-group-item-sm">
+                                                            <input type="text" id="mainSearchInput" />
+                                                            <label for="mainSearchShowHorns">Horns?</label>
+                                                            <input type="checkbox" id="mainSearchShowHorns" data-bind="checked: mainSearchShowHorns"/>
+                                                        </div>
+                                                        <div class="" id="mainSearchResults" data-bind="css: mainSearchShowHornsCssClass">
+                                                            <ul class="list-group">
+                                                                <!-- ko foreach: mainSearchables-->
+                                                                <li class="list-group-item" data-bind="css: cssClass, click: selectMe">
+                                                                    <a href="#">
+                                                                        <span data-bind="foreach: notes">
+                                                                            <span data-bind="text: text, css: cssClass"></span>
+                                                                        </span>
+                                                                        <span data-bind="text: text"></span>
+                                                                        <ul data-bind="foreach: horns" class="hornList">
+                                                                            <li data-bind="text: text"></li>
+                                                                        </ul>
+                                                                    </a>
+                                                                </li>
+                                                                <!-- /ko -->
+                                                                <li class="noResults list-group-item">No results found :(</li>
+                                                                <li class="enterTerms list-group-item">Type the song name</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
@@ -301,9 +166,12 @@
         </div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+        
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 	<script src="js/vendor/bootstrap.js"></script>
-	<script src="js/HornSongData.js?v=110"></script>
+	<script src="js/HornSongData.js?v=111.1"></script>
+	<script src="js/vendor/jquery.fastLiveFilter.js"></script>
+
 	<script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -336,6 +204,14 @@
             }]);
             viewModel.colorblindMode = ko.observable(true); // todo: make this cookie-based? Expand options a lot?
             viewModel.buttonsMode = ko.observable(true);
+            viewModel.mainSearchables = ko.observableArray([]);
+            viewModel.mainSearchShowHorns = ko.observable(false);
+            viewModel.mainSearchShowHornsCssClass = ko.observable("");
+
+            viewModel.mainSearchShowHorns.subscribe(function(newValue) {
+                var css = newValue ? "showHorns" : "";
+                viewModel.mainSearchShowHornsCssClass(css);
+            });
             
             function makeModeStatusCss() {
                 var things = [];
@@ -453,6 +329,31 @@
                 return building;
             }
             
+            function MatchModel(song, containingPattern) {
+                var self = this;
+                self.makeCssClassByMatched = function(newValue) {
+                    return newValue === true ? "matched" : "";
+                };
+                self.noteKey = song.noteKey;
+                self.notes = containingPattern.notes;
+                self.pattern = containingPattern;
+                self.selectMe = function() {
+                    triggerPatternChange(this.pattern);
+                };
+                self.text = song.effect1;
+                var css = self.makeCssClassByMatched(false);
+                self.cssClass = ko.observable(css);
+                self.matches = ko.observable(false);
+                self.matches.subscribe(function(newValue) {
+                    var newClass = self.makeCssClassByMatched(newValue);
+                    self.cssClass(newClass);
+                });
+                self.horns = containingPattern.horns;
+
+                self.matches(true);
+                return self;
+            }
+            
             viewModel.selectedPattern.subscribe(function (newValue) {
                 if (!newValue) return;
                 var all = viewModel.patterns();
@@ -463,7 +364,6 @@
                 }
                 viewModel.selectedPatternSongs(newValue.songs);
                 viewModel.selectedPatternNotes(newValue.notes);
-                
                 viewModel.selectedPatternHorns(newValue.horns);
             });
 
@@ -476,10 +376,17 @@
 
             var allPatterns = hhu.data.SongPatterns;
             var i = 0;
+            var unsortedSearchables = [];
             for (var noteKey in allPatterns) {
                 var current = allPatterns[noteKey];
                 var item = new PatternModel(noteKey, current);
                 viewModel.patterns.push(item);
+
+                for(var i = 0; i < item.songs.length; i++) {
+                    var x = new MatchModel(item.songs[i], item);
+                    unsortedSearchables.push(x);
+                }
+
                 if (item.group == "w") {
                     viewModel.whitePatterns.push(item);
                 } else if (item.group == "p") {
@@ -488,6 +395,9 @@
                     viewModel.orangePatterns.push(item);
                 }
                 i = i + 1;
+            }
+            for(var i = 0; i < unsortedSearchables.length; i++) {
+                viewModel.mainSearchables.push(unsortedSearchables[i]);
             }
 
             ko.applyBindings(viewModel);
@@ -498,7 +408,7 @@
                     
                 };
                 var $doc = $(document);
-                var patternContainer = $("#groupPatternContainer");
+                var patternContainer = $(".tabContainer");
                 function openPatternContainer() {
                     patternContainer.show();
                 }
@@ -512,6 +422,34 @@
                         closePatternContainer();
                     }
                 }
+                var mainSearch = {
+                    resultsList: $("#mainSearchResults > ul"),
+                    input: $("#mainSearchInput"),
+                    timeout: 200
+                };
+                mainSearch.noResultsItem = mainSearch.resultsList.find(".noResults");
+                mainSearch.enterTermsItem = mainSearch.resultsList.find(".enterTerms");
+                mainSearch.searchCallback = function(count) {
+                    console.log("searchCallback: ", count);
+                    if($.trim(mainSearch.input.val()).length == 0) {
+                        console.log("yo");
+                        mainSearch.noResultsItem.hide();
+                        mainSearch.enterTermsItem.show();
+                    } else {
+                        if(count === 0) {
+                            mainSearch.noResultsItem.show();
+                        } else {
+                            mainSearch.noResultsItem.hide();
+                        }
+                    }
+                };
+                mainSearch.input.fastLiveFilter(mainSearch.resultsList, {
+                    timeout: mainSearch.timeout,
+                    callback: mainSearch.searchCallback
+                }).change();
+
+                $(".tabContainer").tabs();
+                
                 viewModel.selectedPattern.subscribe(function() {
                     closePatternContainer();
                 });
@@ -525,7 +463,7 @@
                 // This needs to be last, catches any stray doc clicks to close open dialogs
                 $doc.on("click", function(ev) {
                     console.log("other click");
-                    closePatternContainer();
+                    //closePatternContainer();
                 });
             });
         });

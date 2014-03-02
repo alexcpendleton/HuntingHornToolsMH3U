@@ -1,22 +1,190 @@
+body {
+	background:#fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.hornNote {
+    display: inline-block;
+    width: 22px;
+    height: 18px;
+    line-height: 15px;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: bold;
+
+    background: no-repeat center center;
+    color: transparent;
+}
+.hornNote_a {
+    background-image: url(img/note_a.png);
+}
+.hornNote_b {
+    background-image: url(img/note_b.png);
+}
+.hornNote_g {
+    background-image: url(img/note_g.png);
+}
+.hornNote_o {
+    background-image: url(img/note_o.png);
+}
+.hornNote_p {
+    background-image: url(img/note_p.png);
+}
+.hornNote_r {
+    background-image: url(img/note_r.png);
+}
+.hornNote_w {
+    background-image: url(img/note_w.png);
+}
+.hornNote_y {
+    background-image: url(img/note_y.png);
+}
+
+.patternSelected {
+    background: skyblue;
+}
+
+.container { max-width: 730px; }
+#menuContainer { position: absolute;width: 300px;}
+#songsForSelectedPattern .list-group-item-heading {
+        margin-bottom: 0;
+}
+#hornChooser {
+    color: #fff;
+    font-weight: bold;
+    padding: 0;
+    position: relative;
+}
+#hornChooser:hover, #hornChooser:active, .open #hornChooser {
+    background: transparent;
+}
+#hornChooser .caret {
+    border-top-color: #fff !important;
+    border-bottom-color: #fff !important;
+}
+#navWrapper { position: relative;overflow: visible;}
+#noteDropDownWrapper { float: left;width: 49%;}
+#optionsWrapper { float: right;width:30px;color: #000;text-align: right;}
+#optionsWrapper a, #optionsWrapper a:hover, #optionsWrapper .open a {
+    background: transparent;
+    padding: 0;
+}
+#optionsWrapper .dropdown-menu {
+    padding: 0;margin-left: -140px;width: 180px;
+}
+#optionsWrapper .glyphicon {
+    color: #fff;
+    font-size: 16pt;
+}
+#optionsWrapper label { font-weight: normal;}
+#optionsWrapper .list-group { text-align: left;color: #000;margin-bottom: 0;}
+.songDescriptions .durations {}
+.songData {
+                
+    vertical-align: middle;
+}
+.songNotes {display: block;}
+.songNotes .hornNote { }
+.effects { display: block;}
+.effect { font-weight: bold;}
+.duration { font-style: italic; }
+
+.tabContainer {
+    width: 290px;
+    overflow: hidden;
+    display: none;
+    position: relative;
+}
+#groupPatternContainer {
+    width: 100%;
+    padding: 5px 2px;
+} 
+            
+ul.patternGroup {
+    margin: 0 10px 0 0;
+    padding: 0;
+    width: 85px;
+    float: left;
+}
+.patternGroup li { list-style: none;}
+ul.patternGroup-Orange {
+    margin-right: 0;
+}
+.patternGroup a {
+    display: block;
+    padding: 5px;
+}
+.patternGroup a:hover, .patternGroup a:active {
+    text-decoration: none;
+    background: #428bca;
+}
 
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
+.colorblindMode .hornNote {
+    color: #FFF;background-image: none;border: solid 1px #000;
+    text-transform: uppercase
+}
+
+.colorblindMode .hornNote_a {
+    background-color: aqua;
+    color: #000;
+}
+
+.colorblindMode .hornNote_b {
+    background-color: blue;
+}
+
+.colorblindMode .hornNote_g {
+    background-color: green;
+}
+
+.colorblindMode .hornNote_o {
+    background-color: orange;
+}
+
+.colorblindMode .hornNote_p {
+    background-color: purple;
+}
+
+.colorblindMode .hornNote_r {
+    background-color: red;
+}
+
+.colorblindMode .hornNote_w {
+    background-color: white;
+    color: #000;
+}
+
+.colorblindMode .hornNote_y {
+    background-color: yellow;
+    color: #000;
+}
+.list-group-item-info {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+.colorblindModeListGroupItem { display: none;}
+.aboutText {
+    font-size: 0.8em;
+}
+.buttonText { display: none;}
+.buttonsMode .buttonText { display: inline-block; }
+.buttonsMode .noteText { display: none;}
+
+#mainSearchInput { width: 150px;}
+#mainSearchResults .noResults { display: none;}
+#mainSearchResults .enterTerms { display: none;}
+#mainSearchResults .hornList { display: none;}
+#mainSearchResults.showHorns .hornList { display: block;}
+#mainSearchResults li > a { display: block;cursor: pointer;}
+#mainSearchResults > ul.list-group > li:hover { background: #67B2F3;}
+#mainSearchResults a:hover { text-decoration: none;}
+
+#mainSearchResults > ul.list-group > li.noResults:hover, 
+ #mainSearchResults > ul.list-group > li.enterTerms:hover { background: transparent;}
 
 
 
+input[type='text'] { font-size: 16px;}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.ui-widget { font-family:inherit;font-size: inherit;}
+.ui-tabs .ui-tabs-panel { padding: 0;}

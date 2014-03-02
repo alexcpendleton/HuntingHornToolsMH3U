@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css"/>
-        <link rel="stylesheet" href="css/main.css?v=111.1">
+        <link rel="stylesheet" href="css/main.css?v=1.2.0">
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -69,8 +69,10 @@
                                                     <div id="">
                                                         <div id="mainSearchInputContainer" class="list-group-item list-group-item-sm">
                                                             <input type="text" id="mainSearchInput" />
-                                                            <label for="mainSearchShowHorns">Horns?</label>
-                                                            <input type="checkbox" id="mainSearchShowHorns" data-bind="checked: mainSearchShowHorns"/>
+                                                            <span id="mainSearchShowHornsContainer">
+                                                                <label for="mainSearchShowHorns">Horns?</label>
+                                                                <input type="checkbox" id="mainSearchShowHorns" data-bind="checked: mainSearchShowHorns"/>
+                                                            </span>
                                                         </div>
                                                         <div class="" id="mainSearchResults" data-bind="css: mainSearchShowHornsCssClass">
                                                             <ul class="list-group">
@@ -88,7 +90,7 @@
                                                                 </li>
                                                                 <!-- /ko -->
                                                                 <li class="noResults list-group-item">No results found :(</li>
-                                                                <li class="enterTerms list-group-item">Type the song name</li>
+                                                                <li class="enterTerms list-group-item">Enter search terms above</li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -118,7 +120,7 @@
                                                     </li>
                                                     <li class="list-group-item">
                                                         <span class="aboutText">
-                                                            <p>Version 1.1.0 - <a href="https://github.com/alexcpendleton/HuntingHornToolsMH3U">Alex Pendleton</a></p>
+                                                            <p>Version 1.2.0 - <a href="https://github.com/alexcpendleton/HuntingHornToolsMH3U">Alex Pendleton</a></p>
                                                         </span>
                                                     </li>
                                                 </ul>
@@ -169,7 +171,7 @@
         
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 	<script src="js/vendor/bootstrap.js"></script>
-	<script src="js/HornSongData.js?v=111.1"></script>
+	<script src="js/HornSongData.js?v=1.2.0"></script>
 	<script src="js/vendor/jquery.fastLiveFilter.js"></script>
 
 	<script>
@@ -185,7 +187,6 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.0.0/knockout-min.js"></script>
 	<script type="text/javascript">
         $(function() {
-            
             var viewModel = {
                 colorblindModeClass:"colorblindMode",
                 buttonsModeClass:"buttonsMode"
@@ -404,9 +405,6 @@
             viewModel.selectedPattern(viewModel.patterns()[0]);
 
             $(function() {
-                var $settings = {
-                    
-                };
                 var $doc = $(document);
                 var patternContainer = $(".tabContainer");
                 function openPatternContainer() {
@@ -461,10 +459,10 @@
                     ev.stopPropagation();
                 });
                 // This needs to be last, catches any stray doc clicks to close open dialogs
-                $doc.on("click", function(ev) {
-                    console.log("other click");
-                    //closePatternContainer();
-                });
+                //$doc.on("click", function(ev) {
+                //    console.log("other click");
+                //    //closePatternContainer();
+                //});
             });
         });
 	</script>

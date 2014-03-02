@@ -178,7 +178,7 @@ ul.patternGroup-Orange {
 #mainSearchResults li > a { display: block;cursor: pointer;}
 #mainSearchResults > ul.list-group > li:hover { background: #67B2F3;}
 #mainSearchResults a:hover { text-decoration: none;}
-
+#mainSearchShowHornsContainer { margin-left: 5px;}
 #mainSearchResults > ul.list-group > li.noResults:hover, 
  #mainSearchResults > ul.list-group > li.enterTerms:hover { background: transparent;}
 

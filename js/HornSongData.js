@@ -2900,7 +2900,7 @@ var hhu = {
           ],
           "Effect1": "Attack & Defense Boost (S)",
           "Effect2": "Attack and Defense Boost Bonus",
-          "Duration1": "120(150",
+          "Duration1": "120(150)",
           "Extension": "+90(+120)"
         },
         {
